@@ -1,0 +1,7 @@
+﻿  chess.cpp
+  test.cpp
+  testMove.cpp
+C:\Users\kingl\Downloads\231.1.Demo\testMove.cpp(9,10): error C1083: Cannot open include file: 'move.h': No such file or directory
+  uiDraw.cpp
+  uiInteract.cpp
+  Generating Code...
