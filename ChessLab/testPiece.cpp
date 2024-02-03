@@ -21,7 +21,7 @@ void PieceTest::constructorWhite() const
 	Piece pawn = new Piece(2, 0, true);
 	// VERIFY 
 	assert(pawn.getPosition().getRow() == 2);
-	assert(pawn.getPosition().getColumn() == 0);
+	assert(pawn.getPosition().getCol() == 0);
 	assert(pawn.isWhite() == true);
 	assert(pawn.hasMoved() == false);
 }

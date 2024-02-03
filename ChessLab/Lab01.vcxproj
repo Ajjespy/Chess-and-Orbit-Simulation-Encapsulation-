@@ -99,6 +99,8 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="chess.cpp" />
+    <ClCompile Include="move.cpp" />
+    <ClCompile Include="position.cpp" />
     <ClCompile Include="test.cpp" />
     <ClCompile Include="testMove.cpp" />
     <ClCompile Include="testPawn.cpp" />
@@ -109,6 +111,9 @@
     <ClCompile Include="uiInteract.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="move.h" />
+    <ClInclude Include="pieceType.h" />
+    <ClInclude Include="position.h" />
     <ClInclude Include="test.h" />
     <ClInclude Include="testMove.h" />
     <ClInclude Include="testPawn.h" />
