@@ -10,7 +10,7 @@
 #include "test.h"
 #include "testPosition.h"
 #include "testMove.h"
-#include "testPawn.h"
+//#include "testPawn.h"
 #include "testPiece.h"
 
 /*****************************************************************

@@ -14,7 +14,7 @@
 class Board
 {
 public:
-	Board(ogstream gout);
+	Board();
 
 	int getCurrentMove()
 	{
@@ -30,11 +30,13 @@ public:
 	Piece get(Position pos);
 	void free();
 	void reset();
+	void empty();
+	void clear();
 	void move(Move move);
-	void assign(Piece p);
+	void assign(Position pos, char p);
 
 private:
-	Piece board[64];
+	char board[64];
 	int currentMove;
 	ogstream gout;
 	

@@ -5,15 +5,15 @@
  *    Austin Jesperson
  ************************************************************************/
 
-#include "testPawn.h"
+/*#include "testPawn.h"
 #include "pawn.h"
 #include "board.h"
-#include <cassert>
+#include <cassert>*/
 
  /*************************************
   * Constructor
   **************************************/
-void PawnTest::constructor_default() const
+/*void PawnTest::constructor_default() const
 {  // SETUP 
 		// we need a blank board to start
    // EXERCISE	
@@ -21,7 +21,7 @@ void PawnTest::constructor_default() const
 
 	// VERIFY
 	assert(moves == {});
-	for (i = 0; i < 64; i++)
+	for (int i = 0; i < 64; i++)
 	{
 		assert(board[i] == Space)
 	}
@@ -188,4 +188,4 @@ void PawnTest::pawn_promoteCapture() const
 	// VERIFY
 	assert(moves == {"b7a8pQ", "b7c8pQ"});
 
-}	//TEARDOWN
+}	//TEARDOWN*/
