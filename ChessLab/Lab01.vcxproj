@@ -106,7 +106,6 @@
     <ClCompile Include="test.cpp" />
     <ClCompile Include="testMove.cpp" />
     <ClCompile Include="testPawn.cpp" />
-    <ClCompile Include="testPiece.h" />
     <ClCompile Include="testPiece.cpp" />
     <ClCompile Include="testPosition.cpp" />
     <ClCompile Include="uiDraw.cpp" />
@@ -121,6 +120,7 @@
     <ClInclude Include="test.h" />
     <ClInclude Include="testMove.h" />
     <ClInclude Include="testPawn.h" />
+    <ClInclude Include="testPiece.h" />
     <ClInclude Include="testPosition.h" />
     <ClInclude Include="uiDraw.h" />
     <ClInclude Include="uiInteract.h" />
