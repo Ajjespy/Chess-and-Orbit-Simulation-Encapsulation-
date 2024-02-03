@@ -16,11 +16,7 @@ public:
 	// Constructor
 	Piece(int r, int c, bool color);
 
-	void assignPos(Position pos)
-	{
-		position = pos;
-		nMoves++;
-	}
+	void assignPos(Position pos);
 
 	bool isWhite()
 	{
@@ -44,9 +40,13 @@ public:
 	}
 
 	// in progress
-	bool justMoved()
+	bool hasMoved()
 	{
-		return true;
+		if (nMoves > 0)
+		{
+			return true;
+		}
+		return false;
 	}
 
 	// in progress

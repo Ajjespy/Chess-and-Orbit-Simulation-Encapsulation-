@@ -18,7 +18,7 @@ void PieceTest::constructorWhite() const
 {
 	// SETUP
 	// EXERCISE
-	Piece pawn = new Piece(2, 0, true);
+	Piece pawn = Piece(2, 0, true);
 	// VERIFY 
 	assert(pawn.getPosition().getRow() == 2);
 	assert(pawn.getPosition().getCol() == 0);
@@ -33,10 +33,10 @@ void PieceTest::constructorBlack() const
 {
 	// SETUP
 	// EXERCISE
-	Piece p = new Piece(7, 0, false);
+	Piece p = Piece(7, 0, false);
 	// VERIFY 
 	assert(p.getPosition().getRow() == 7);
-	assert(p.getPosition().getColumn() == 0);
+	assert(p.getPosition().getCol() == 0);
 	assert(p.isWhite() == false);
 	assert(p.hasMoved() == false);
 }
@@ -47,14 +47,14 @@ void PieceTest::constructorBlack() const
 void PieceTest::assignPos() const
 {
 	// SETUP
-	Piece p = new Piece(2, 0, true); // white pawn at location 8
-	Poistion pos = new Position();
+	Piece p = Piece(2, 0, true); // white pawn at location 8
+	Position pos = Position();
 	pos.set(4, 0);
 	// EXERCISE
-	p.assign(pos);
+	p.assignPos(pos);
 	// VERIFY
 	assert(p.getPosition().getRow() == 4);
-	assert(p.getPosition().getColumn() == 0);
+	assert(p.getPosition().getCol() == 0);
 	assert(p.isWhite() == true);
 	assert(p.hasMoved() == true);
 }
@@ -65,11 +65,11 @@ void PieceTest::assignPos() const
 void PieceTest::invalidPos() const
 {
 	// SETUP
-	Piece p = new Piece(2, 0, true); //white pawn at location 8
-	Position pos = new Position();
+	Piece p = Piece(2, 0, true); //white pawn at location 8
+	Position pos = Position();
 	pos.set(20, 15);
 	// EXERCISE
-	p.assign(pos);
+	p.assignPos(pos);
 	// VERIFY
 	assert(p.getPosition().getRow() == 2);
 	assert(p.getPosition().getRow() == 0);
@@ -83,18 +83,18 @@ void PieceTest::invalidPos() const
 void PieceTest::keepTrackofMoves() const
 {
 	// SETUP
-	Piece p = new Piece(2, 0, true);
-	Position pos1 = new Position();
-	Position pos2 = new Position();
-	Position pos3 = new Position();
+	Piece p = Piece(2, 0, true);
+	Position pos1;
+	Position pos2;
+	Position pos3;
 	pos1.set(3, 0);
 	pos2.set(4, 0);
 	pos3.set(5, 0);
 	// EXERCISE
-	p.assign(pos1);
-	p.assign(pos2);
-	p.assign(pos3);
+	p.assignPos(pos1);
+	p.assignPos(pos2);
+	p.assignPos(pos3);
 	// VERIFY
-	assert(p.getNmoves() == 3);
+	assert(p.getNMoves() == 3);
 	assert(p.hasMoved() == true);
 }

@@ -22,5 +22,5 @@ void testRunner()
 	MoveTest().run();
 	PositionTest().run();
 	//PawnTest().run();
-	//PieceTest().run();
+	PieceTest().run();
 }

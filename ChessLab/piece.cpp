@@ -10,6 +10,23 @@
 #include "piece.h"
 
 /**************************************
+* PIECE : ASSIGN POS
+***************************************/
+void Piece::assignPos(Position pos)
+{
+	if (pos.getRow() > 8 || pos.getRow() < 1)
+	{
+		return;
+	}
+	else if (pos.getCol() > 7 || pos.getCol() < 0)
+	{
+		return;
+	}
+	position = pos;
+	nMoves++;
+}
+
+/**************************************
 * PIECE : CONSTRUCTOR
 ***************************************/
 Piece::Piece(int r, int c, bool color)
