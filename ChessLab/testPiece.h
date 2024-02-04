@@ -4,8 +4,9 @@
  * Author:
  *    Emilio Ordonez
  ************************************************************************/
-
+#include <iostream>
 #pragma once
+using namespace std;
 
 class PieceTest
 {
@@ -17,6 +18,7 @@ public:
 		assignPos();
 		invalidPos();
 		keepTrackofMoves();
+		cout << "PieceTest: 5/5 Tests passed.";
 	}
 private:
 	void constructorWhite() const;

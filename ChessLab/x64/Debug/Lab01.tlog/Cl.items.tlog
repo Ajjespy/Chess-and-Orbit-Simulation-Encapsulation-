@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 C:\Users\MSI\source\repos\cse231\ChessLab\board.cpp;C:\Users\MSI\source\repos\cse231\ChessLab\x64\Debug\board.obj
 C:\Users\MSI\source\repos\cse231\ChessLab\chess.cpp;C:\Users\MSI\source\repos\cse231\ChessLab\x64\Debug\chess.obj
 C:\Users\MSI\source\repos\cse231\ChessLab\move.cpp;C:\Users\MSI\source\repos\cse231\ChessLab\x64\Debug\move.obj
@@ -10,3 +11,17 @@ C:\Users\MSI\source\repos\cse231\ChessLab\testPiece.cpp;C:\Users\MSI\source\repo
 C:\Users\MSI\source\repos\cse231\ChessLab\testPosition.cpp;C:\Users\MSI\source\repos\cse231\ChessLab\x64\Debug\testPosition.obj
 C:\Users\MSI\source\repos\cse231\ChessLab\uiDraw.cpp;C:\Users\MSI\source\repos\cse231\ChessLab\x64\Debug\uiDraw.obj
 C:\Users\MSI\source\repos\cse231\ChessLab\uiInteract.cpp;C:\Users\MSI\source\repos\cse231\ChessLab\x64\Debug\uiInteract.obj
+=======
+C:\Users\kingl\OneDrive\Documents\cse231\ChessLab\board.cpp;C:\Users\kingl\OneDrive\Documents\cse231\ChessLab\x64\Debug\board.obj
+C:\Users\kingl\OneDrive\Documents\cse231\ChessLab\chess.cpp;C:\Users\kingl\OneDrive\Documents\cse231\ChessLab\x64\Debug\chess.obj
+C:\Users\kingl\OneDrive\Documents\cse231\ChessLab\move.cpp;C:\Users\kingl\OneDrive\Documents\cse231\ChessLab\x64\Debug\move.obj
+C:\Users\kingl\OneDrive\Documents\cse231\ChessLab\piece.cpp;C:\Users\kingl\OneDrive\Documents\cse231\ChessLab\x64\Debug\piece.obj
+C:\Users\kingl\OneDrive\Documents\cse231\ChessLab\position.cpp;C:\Users\kingl\OneDrive\Documents\cse231\ChessLab\x64\Debug\position.obj
+C:\Users\kingl\OneDrive\Documents\cse231\ChessLab\test.cpp;C:\Users\kingl\OneDrive\Documents\cse231\ChessLab\x64\Debug\test.obj
+C:\Users\kingl\OneDrive\Documents\cse231\ChessLab\testMove.cpp;C:\Users\kingl\OneDrive\Documents\cse231\ChessLab\x64\Debug\testMove.obj
+C:\Users\kingl\OneDrive\Documents\cse231\ChessLab\testPawn.cpp;C:\Users\kingl\OneDrive\Documents\cse231\ChessLab\x64\Debug\testPawn.obj
+C:\Users\kingl\OneDrive\Documents\cse231\ChessLab\testPiece.cpp;C:\Users\kingl\OneDrive\Documents\cse231\ChessLab\x64\Debug\testPiece.obj
+C:\Users\kingl\OneDrive\Documents\cse231\ChessLab\testPosition.cpp;C:\Users\kingl\OneDrive\Documents\cse231\ChessLab\x64\Debug\testPosition.obj
+C:\Users\kingl\OneDrive\Documents\cse231\ChessLab\uiDraw.cpp;C:\Users\kingl\OneDrive\Documents\cse231\ChessLab\x64\Debug\uiDraw.obj
+C:\Users\kingl\OneDrive\Documents\cse231\ChessLab\uiInteract.cpp;C:\Users\kingl\OneDrive\Documents\cse231\ChessLab\x64\Debug\uiInteract.obj
+>>>>>>> 43dfa495098737d0a29545efd2f3010898ad2708

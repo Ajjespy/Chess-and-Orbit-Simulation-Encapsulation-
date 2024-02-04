@@ -50,14 +50,12 @@ public:
 	}
 
 	// in progress
-	virtual char getLetter();
 	virtual void display(ogstream gout);
 	virtual void getMoves();
-	void assignPiece(Piece piece);
 
 protected:
 	Position position;
 	bool fWhite;
-	int nMoves;
+	int nMoves = 0;
 	int lastMove;
 };

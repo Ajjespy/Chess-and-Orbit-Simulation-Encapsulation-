@@ -36,12 +36,6 @@
     <ClCompile Include="testPosition.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="testPiece.h">
-      <Filter>Header Files</Filter>
-    </ClCompile>
-    <ClCompile Include="testPiece.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="testPawn.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
@@ -55,6 +49,9 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="board.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="testPiece.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
@@ -90,6 +87,9 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="board.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="testPiece.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

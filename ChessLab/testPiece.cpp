@@ -65,14 +65,14 @@ void PieceTest::assignPos() const
 void PieceTest::invalidPos() const
 {
 	// SETUP
-	Piece p = Piece(2, 0, true); //white pawn at location 8
+	Piece p = Piece(2, 1, true); //white pawn
 	Position pos = Position();
 	pos.set(20, 15);
 	// EXERCISE
 	p.assignPos(pos);
 	// VERIFY
 	assert(p.getPosition().getRow() == 2);
-	assert(p.getPosition().getRow() == 0);
+	assert(p.getPosition().getCol() == 1);
 	assert(p.isWhite() == true);
 	assert(p.hasMoved() == false);
 }
