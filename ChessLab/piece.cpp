@@ -29,10 +29,11 @@ void Piece::assignPos(Position pos)
 /**************************************
 * PIECE : CONSTRUCTOR
 ***************************************/
-Piece::Piece(int r, int c, bool color)
+Piece::Piece(int r, int c, bool color, PieceType pt)
 {
 	position = Position(r, c);
 	fWhite = color;
+	type = pt
 }
 
 /**************************************

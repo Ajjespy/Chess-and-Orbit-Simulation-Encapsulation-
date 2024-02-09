@@ -9,12 +9,13 @@
 #pragma once
 #include "position.h"
 #include "uiDraw.h"
+#include "pieceType.h"
 
 class Piece
 {
 public:
 	// Constructor
-	Piece(int r, int c, bool color);
+	Piece(int r, int c, bool color, PieceType pt)
 
 	void assignPos(Position pos);
 
@@ -58,4 +59,5 @@ protected:
 	bool fWhite;
 	int nMoves = 0;
 	int lastMove;
+	PieceType type;
 };

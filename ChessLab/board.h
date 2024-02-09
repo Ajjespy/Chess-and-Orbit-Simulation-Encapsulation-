@@ -36,7 +36,7 @@ public:
 	void assign(Position pos, char p);
 
 private:
-	char board[64];
+	Piece board[64];
 	int currentMove;
 	ogstream gout;
 	
