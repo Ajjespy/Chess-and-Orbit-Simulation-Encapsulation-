@@ -12,13 +12,14 @@
 Board::Board()
 {
     clear();
+    reset();
 }
 
 void Board::clear()
 {
     for (int i = 0; i < 64; i++)
     {
-        assign(Position(i), Piece(Position(i), NULL, SPACE));
+        assign(Position(i), Space(Position(i)));
     }
 }
 
@@ -32,31 +33,31 @@ void Board::reset()
 {
     //Place pieces on the board
     //White pieces;
-    board[0] = Piece(Position(0), true, ROOK);  
-    board[1] = Piece(Position(1), true, KNIGHT);
-    board[2] = Piece(Position(2), true, BISHOP); 
-    board[3] = Piece(Position(3), true, QUEEN); 
-    board[4] = Piece(Position(4), true, KING); 
-    board[5] = Piece(Position(5), true, BISHOP); 
-    board[6] = Piece(Position(6), true, KNIGHT); 
-    board[7] = Piece(Position(7), true, ROOK); 
+    board[0] = Rook(Position(0), true);  
+    board[1] = Knight(Position(1), true);
+    board[2] = Bishop(Position(2), true); 
+    board[3] = Queen(Position(3), true); 
+    board[4] = King(Position(4), true); 
+    board[5] = Bishop(Position(5), true); 
+    board[6] = Knight(Position(6), true); 
+    board[7] = Rook(Position(7), true); 
     for (int i = 8; i < 16; i++)
     {
-        board[i] = Piece(Position(i), true, PAWN);
+        board[i] = Pawn(Position(i), true);
     }
 
     //Black pieces;
-    board[63] = Piece(Position(63), false, ROOK);
-    board[62] = Piece(Position(62), false, KNIGHT);
-    board[61] = Piece(Position(61), false, BISHOP);
-    board[60] = Piece(Position(60), false, KING); 
-    board[59] = Piece(Position(59), false, QUEEN);
-    board[58] = Piece(Position(58), false, BISHOP);
-    board[57] = Piece(Position(57), false, KNIGHT);
-    board[56] = Piece(Position(56), false, ROOK);
+    board[63] = Rook(Position(63), false);
+    board[62] = Knight(Position(62), false);
+    board[61] = Bishop(Position(61), false);
+    board[60] = King(Position(60), false); 
+    board[59] = Queen(Position(59), false);
+    board[58] = Bishop(Position(58), false);
+    board[57] = Knight(Position(57), false);
+    board[56] = Rook(Position(56), false);
     for (int i = 48; i < 56; i++)
     {
-        board[i] = Piece(Position(i), false, PAWN);
+        board[i] = Pawn(Position(i), false);
     }
             
 }

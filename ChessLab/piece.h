@@ -17,7 +17,7 @@ class Piece
 public:
 	// Constructor
 	Piece(Position p, bool color, PieceType pt);
-	Piece() {};
+	Piece();
 
 	void assignPos(Position pos);
 
@@ -53,8 +53,8 @@ public:
 	}
 
 	// in progress
-	//virtual void display(ogstream gout) = 0;
-	//virtual void getMoves(const Board * board) = 0;
+	//virtual void display(ogstream gout);
+	//virtual void getMoves(const Board* board);
 
 protected:
 	Position position;

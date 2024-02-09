@@ -8,8 +8,14 @@
  ************************************************************************/
 #pragma once
 #include "uiDraw.h"
-#include "piece.h"
 #include "move.h"
+#include "rook.h"
+#include "knight.h"
+#include "bishop.h"
+#include "king.h"
+#include "queen.h"
+#include "pawn.h"
+#include "space.h"
 
 class Board
 {
@@ -27,7 +33,7 @@ public:
 	}
 
 	void display(Position posHover, Position posSel);
-	Piece get(Position pos);
+	Piece getPiece(Position pos);
 	void free();
 	void reset();
 	void empty();

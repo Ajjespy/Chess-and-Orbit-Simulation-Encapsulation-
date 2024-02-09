@@ -1,14 +1,21 @@
+/***********************************************************************
+ * Source File:
+ *    PAWN : Handles a pawn on the board
+ * Author:
+ *    Austin Jesperson
+ * Summary:
+ *    A pawn on the chess board.
+ ************************************************************************/
+
 #include "pawn.h"
-
-
-
 set <int> Pawn::getMoves(const Board* board)
 {
+    /*
     set <int> possible;
 
     
-    int row = getPosition() / 8;  // current location row
-    int col = getPosition() % 8;  // current location column
+    int row = getPosition().getLocation() / 8;  // current location row
+    int col = getPosition().getLocation() % 8;  // current location column
     int r;                   // the row we are checking
     int c;                   // the column we are checking
     
@@ -99,4 +106,5 @@ set <int> Pawn::getMoves(const Board* board)
     }
 
     return possible;
+    */
 }

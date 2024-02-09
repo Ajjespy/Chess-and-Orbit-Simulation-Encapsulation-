@@ -18,7 +18,7 @@ void PieceTest::constructorWhite() const
 {
 	// SETUP
 	// EXERCISE
-	Piece pawn = Piece(2, 0, true);
+	Piece pawn = Piece(Position(2,0),true,PAWN);
 	// VERIFY 
 	assert(pawn.getPosition().getRow() == 2);
 	assert(pawn.getPosition().getCol() == 0);
@@ -33,7 +33,7 @@ void PieceTest::constructorBlack() const
 {
 	// SETUP
 	// EXERCISE
-	Piece p = Piece(7, 0, false);
+	Piece p = Piece(Position(7, 0), false,PAWN);
 	// VERIFY 
 	assert(p.getPosition().getRow() == 7);
 	assert(p.getPosition().getCol() == 0);
@@ -47,7 +47,7 @@ void PieceTest::constructorBlack() const
 void PieceTest::assignPos() const
 {
 	// SETUP
-	Piece p = Piece(2, 0, true); // white pawn at location 8
+	Piece p = Piece(Position(2, 0), true,PAWN); // white pawn at location 8
 	Position pos = Position();
 	pos.set(4, 0);
 	// EXERCISE
@@ -65,7 +65,7 @@ void PieceTest::assignPos() const
 void PieceTest::invalidPos() const
 {
 	// SETUP
-	Piece p = Piece(2, 1, true); //white pawn
+	Piece p = Piece(Position(2, 1), true,PAWN); //white pawn
 	Position pos = Position();
 	pos.set(20, 15);
 	// EXERCISE
@@ -83,7 +83,7 @@ void PieceTest::invalidPos() const
 void PieceTest::keepTrackofMoves() const
 {
 	// SETUP
-	Piece p = Piece(2, 0, true);
+	Piece p = Piece(Position(2, 0), true,PAWN);
 	Position pos1;
 	Position pos2;
 	Position pos3;

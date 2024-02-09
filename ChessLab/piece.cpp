@@ -39,15 +39,15 @@ Piece::Piece(Position p, bool color, PieceType pt)
 /**************************************
 * PIECE : DISPLAY
 ***************************************/
-/*void Piece::display(ogstream gout)
+void Piece::display(ogstream gout)
 {
-	// in progress
-}*/
+	return;
+}
 
 /******************************************
 * PIECE : GETMOVES
 *******************************************/
-/*void Piece::getMoves(const Board* board)
+void Piece::getMoves(const Board* board)
 {
-	// in progress
-}*/
+	return;
+}
