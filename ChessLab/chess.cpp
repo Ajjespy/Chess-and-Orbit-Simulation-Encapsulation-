@@ -514,7 +514,7 @@ int WINAPI WinMain(
 int main(int argc, char** argv)
 #endif // !_WIN32
 {
-#ifdef TEST
+
    Interface ui("Chess");    
 
    // Initialize the game class
@@ -544,9 +544,9 @@ int main(int argc, char** argv)
 
    // set everything into action
    ui.run(callBack, board);  
-#endif TEST
 
-   testRunner();
+
+   //testRunner();
 
    return 0;
 }

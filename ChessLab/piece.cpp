@@ -29,25 +29,25 @@ void Piece::assignPos(Position pos)
 /**************************************
 * PIECE : CONSTRUCTOR
 ***************************************/
-Piece::Piece(int r, int c, bool color, PieceType pt)
+Piece::Piece(Position p, bool color, PieceType pt)
 {
-	position = Position(r, c);
+	position = p;
 	fWhite = color;
-	type = pt
+	type = pt;
 }
 
 /**************************************
 * PIECE : DISPLAY
 ***************************************/
-void Piece::display(ogstream gout)
+/*void Piece::display(ogstream gout)
 {
 	// in progress
-}
+}*/
 
 /******************************************
 * PIECE : GETMOVES
 *******************************************/
-void Piece::getMoves()
+/*void Piece::getMoves(const Board* board)
 {
 	// in progress
-}
+}*/

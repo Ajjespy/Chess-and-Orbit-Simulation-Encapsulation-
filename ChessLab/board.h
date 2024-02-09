@@ -33,7 +33,7 @@ public:
 	void empty();
 	void clear();
 	void move(Move move);
-	void assign(Position pos, char p);
+	void assign(Position pos, Piece p);
 
 private:
 	Piece board[64];

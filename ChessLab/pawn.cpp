@@ -2,7 +2,7 @@
 
 
 
-set <int> Pawn::getPossibleMoves(const char* board)
+set <int> Pawn::getMoves(const Board* board)
 {
     set <int> possible;
 

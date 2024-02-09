@@ -9,5 +9,6 @@ using namespace std;
 class Pawn : public Piece
 {
 public:
-    set <int> getPossibleMoves(const char* board);
+    set <int> getMoves(const Board* board);
+    void display(ogstream gout);
     
