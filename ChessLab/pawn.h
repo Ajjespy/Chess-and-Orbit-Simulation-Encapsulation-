@@ -24,6 +24,6 @@ public:
         type = pt;
     }
 
-    //set <int> getMoves(const Board* board);
+    set <int> getMoves(const Board* board);
     void draw(ogstream& gout);
 };

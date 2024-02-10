@@ -10,6 +10,9 @@
 #include "position.h"
 #include "uiDraw.h"
 #include "pieceType.h"
+#include <set> // for STD::SET
+
+using namespace std;
 
 class Board;
 
@@ -55,7 +58,16 @@ public:
 
 	// in progress
 	virtual void draw(ogstream& gout) {};
-	virtual void getMoves(const Board* board) ;
+	virtual set <int> getMoves(const Board& board)
+	{
+		set<int> possible;
+		return possible;
+	}
+
+	struct RC {
+		int row;
+		int col;
+	};
 
 protected:
 	Position position;

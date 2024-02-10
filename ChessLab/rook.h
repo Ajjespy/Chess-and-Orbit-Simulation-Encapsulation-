@@ -8,7 +8,12 @@
  ************************************************************************/
 
 #include "piece.h"
+#include "board.h"
 #pragma once
+
+using namespace std;
+
+class Board;
 
 class Rook : public Piece
 {
@@ -21,4 +26,5 @@ public:
 	}
 
 	void draw(ogstream& gout);
+	set <int> getMoves(const Board& board);
 };

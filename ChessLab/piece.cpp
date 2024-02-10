@@ -35,11 +35,3 @@ Piece::Piece(Position p, bool color, PieceType pt)
 	fWhite = color;
 	type = pt;
 }
-
-/******************************************
-* PIECE : GETMOVES
-*******************************************/
-void Piece::getMoves(const Board* board)
-{
-	return;
-}

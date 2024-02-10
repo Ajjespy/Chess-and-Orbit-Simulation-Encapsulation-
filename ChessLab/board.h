@@ -44,6 +44,11 @@ public:
 	void assign(Position pos, Piece* p);
 	void draw(const Interface& ui);
 
+	Piece* getPiece(int location) const
+	{
+		return  board[location];
+	}
+
 private:
 	Piece* board[64];
 	int currentMove = 0;
