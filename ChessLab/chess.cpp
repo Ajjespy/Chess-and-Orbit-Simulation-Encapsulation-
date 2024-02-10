@@ -11,79 +11,13 @@
 #include <cassert>        // for ASSERT
 #include <fstream>        // for IFSTREAM
 #include <string>         // for STRING
+#include "board.h"
 using namespace std;
 
-/***********************************************
- * Row Column
- * Simple row/column pair
- ************************************************/
-struct RC
-{
-   int row;
-   int col;
-};
-
-/****************************************************
- * IS NOT WHITE
- * Is the current location valid and the piece is either
- * black (uppercase) or space
- ***************************************************/
-inline bool isNotWhite(const char* board, int row, int col)
-{
-   // not white if we are off the board or if we are looking at a space
-   if (row < 0 || row >= 8 || col < 0 || col >= 8)
-      return false;
-   char piece = board[row * 8 + col];
-
-   return piece == ' ' || (piece >= 'A' && piece <= 'Z');
-}
-
-/****************************************************
- * IS  WHITE
- * Is the current location valid and the piece is white
- ***************************************************/
-inline bool isWhite(const char* board, int row, int col)
-{
-   // not white if we are off the board or if we are looking at a space
-   if (row < 0 || row >= 8 || col < 0 || col >= 8)
-      return false;
-   char piece = board[row * 8 + col];
-
-   return (piece >= 'a' && piece <= 'z');
-}
-
-/****************************************************
- * IS NOT BLACK
- * Is the current location valid and the piece is either
- * white (lowercase) or space
- ***************************************************/
-inline bool isNotBlack(const char* board, int row, int col)
-{
-   // not white if we are off the board or if we are looking at a space
-   if (row < 0 || row >= 8 || col < 0 || col >= 8)
-      return false;
-   char piece = board[row * 8 + col];
-
-   return piece == ' ' || (piece >= 'a' && piece <= 'z');
-}
-
-/****************************************************
- * IS  BLACK
- * Is the current location valid and the piece is black
- ***************************************************/
-inline bool isBlack(const char* board, int row, int col)
-{
-   // not white if we are off the board or if we are looking at a space
-   if (row < 0 || row >= 8 || col < 0 || col >= 8)
-      return false;
-   char piece = board[row * 8 + col];
-
-   return (piece >= 'A' && piece <= 'Z');
-}
 /*********************************************************
  * GET POSSIBLE MOVES
  * Determine all the possible moves for a given chess piece
- *********************************************************/
+ ********************************************************
 set <int> getPossibleMoves(const char* board, int location)
 {
    set <int> possible;
@@ -269,11 +203,12 @@ set <int> getPossibleMoves(const char* board, int location)
 
    return possible;
 }
+*/
 
 /***************************************************
  * DRAW
  * Draw the current state of the game
- ***************************************************/
+ **************************************************
 void draw(const char* board, const Interface & ui, const set <int> & possible)
 {
    ogstream gout;
@@ -332,11 +267,12 @@ void draw(const char* board, const Interface & ui, const set <int> & possible)
          break;
       }
 }
+*/
 
 /*********************************************
  * MOVE 
  * Execute one movement. Return TRUE if successful
- *********************************************/
+ ********************************************
 bool move(char* board, int positionFrom, int positionTo)
 {
    // do not move if a move was not indicated
@@ -373,6 +309,7 @@ bool move(char* board, int positionFrom, int positionTo)
    return false;
 
 }
+*/
 
 /*************************************
  * All the interesting work happens here, when
@@ -381,9 +318,9 @@ bool move(char* board, int positionFrom, int positionTo)
  * engine will wait until the proper amount of
  * time has passed and put the drawing on the screen.
  **************************************/
-void callBack(Interface *pUI, void * p)
+void callBack(Interface *pUI, void* p)
 {
-   set <int> possible;
+   /*set <int> possible;
 
    // the first step is to cast the void pointer into a game object. This
    // is the first step of every single callback function in OpenGL. 
@@ -401,14 +338,22 @@ void callBack(Interface *pUI, void * p)
 
    // draw the board
    draw(board, *pUI, possible);
-
+   */
+    Board* board = (Board*)p;
+    if (pUI->getPreviousPosition()!= -1 && pUI->getSelectPosition() != -1)
+    {
+		board->move(pUI->getPreviousPosition(), pUI->getSelectPosition());
+		pUI->clearSelectPosition();
+    }
+    
+    board->draw(*pUI);
 }
 
 /********************************************************
  * PARSE
  * Determine the nature of the move based on the input.
  * This is the only function understanding Smith notation
- *******************************************************/
+ ******************************************************
 void parse(const string& textMove, int& positionFrom, int& positionTo)
 {
    string::const_iterator it = textMove.cbegin();
@@ -471,11 +416,12 @@ void parse(const string& textMove, int& positionFrom, int& positionTo)
        positionTo   < 0 || positionTo   >= 64)
       positionFrom = positionTo = -1;
 }
+*/
 
 /********************************************************
  * READ FILE
  * Read a file where moves are encoded in Smith notation
- *******************************************************/
+ ******************************************************
 void readFile(const char* fileName, char* board)
 {
    // open the file
@@ -497,6 +443,7 @@ void readFile(const char* fileName, char* board)
    // close and done
    fin.close();
 }
+*/
 
 /*********************************
  * Main is pretty sparse.  Just initialize
@@ -519,6 +466,7 @@ int main(int argc, char** argv)
 
    // Initialize the game class
    // note this is upside down: 0 row is at the bottom
+   /*
    char board[64] = {
       'r', 'n', 'b', 'q', 'k', 'b', 'n', 'r',
       'p', 'p', 'p', 'p', 'p', 'p', 'p', 'p',
@@ -530,20 +478,27 @@ int main(int argc, char** argv)
       'P', 'P', 'P', 'P', 'P', 'P', 'P', 'P',
       'R', 'N', 'B', 'Q', 'K', 'B', 'N', 'R'
    };
+   */
+
+   Board b;
+   void* p = &b;
    
 #ifdef _WIN32
  //  int    argc;
  //  LPWSTR * argv = CommandLineToArgvW(GetCommandLineW(), &argc);
  //  string filename = argv[1];
+   /*
    if (__argc == 2)
       readFile(__argv[1], board);
+      */
 #else // !_WIN32
    if (argc == 2)
       readFile(argv[1], board);
 #endif // !_WIN32
 
    // set everything into action
-   ui.run(callBack, board);  
+
+   ui.run(callBack, p);  
 
 
    //testRunner();

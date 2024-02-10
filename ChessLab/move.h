@@ -12,9 +12,10 @@
 #include <string>
 #include "position.h"  // Every move has two Positions as attributes
 #include "pieceType.h" // A piece type
+#include "board.h"
 
 
-class Board;
+
 class MoveTest;
 
 /***************************************************
@@ -54,7 +55,7 @@ class Move
       void setDes(const Position & des) { dest       = des; }
       void setEnPassant()               { enpassant  = true;}
       void setPromote(PieceType pt)     { promote      = pt;  }
-      void complete(const Board& board);
+      //void complete(const Board & board);
       void setCastle(bool isKing)
       {
          if (isKing)

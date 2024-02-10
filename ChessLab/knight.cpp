@@ -6,3 +6,10 @@
  * Summary:
  *    A knight on the board. 
  ************************************************************************/
+
+ #include "knight.h"
+
+ void Knight::draw(ogstream& gout)
+{
+	gout.drawKnight(position.getLocation(), fWhite);
+}

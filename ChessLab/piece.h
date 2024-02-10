@@ -10,14 +10,15 @@
 #include "position.h"
 #include "uiDraw.h"
 #include "pieceType.h"
-#include "board.h"
+
+class Board;
 
 class Piece
 {
 public:
 	// Constructor
 	Piece(Position p, bool color, PieceType pt);
-	Piece();
+	Piece() {};
 
 	void assignPos(Position pos);
 
@@ -53,13 +54,13 @@ public:
 	}
 
 	// in progress
-	//virtual void display(ogstream gout);
-	//virtual void getMoves(const Board* board);
+	virtual void draw(ogstream& gout) {};
+	virtual void getMoves(const Board* board) ;
 
 protected:
 	Position position;
 	bool fWhite;
 	int nMoves = 0;
-	int lastMove;
+	int lastMove = -1;
 	PieceType type;
 };

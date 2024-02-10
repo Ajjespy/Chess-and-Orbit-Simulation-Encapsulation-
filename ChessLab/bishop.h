@@ -16,5 +16,8 @@ public:
 	{
 		position = pos;
 		fWhite = color;
+		type = pt;
 	}
+
+	void draw(ogstream& gout);
 };

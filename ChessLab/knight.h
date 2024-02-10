@@ -13,9 +13,12 @@
 class Knight : public Piece
 {
 public:
-	Knight(Position pos, bool color)
+	Knight(Position pos, bool color, PieceType pt = KNIGHT)
 	{
 		position = pos;
 		fWhite = color;
+		type = pt;
 	}
+
+	void draw(ogstream& gout);
 };

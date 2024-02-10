@@ -6,3 +6,9 @@
  * Summary:
  *    A bishop on the board. 
  ************************************************************************/
+#include "bishop.h"
+
+void Bishop::draw(ogstream& gout)
+{
+	gout.drawBishop(position.getLocation(), fWhite);
+}

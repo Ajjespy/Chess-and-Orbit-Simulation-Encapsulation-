@@ -109,7 +109,6 @@
     <ClCompile Include="position.cpp" />
     <ClCompile Include="queen.cpp" />
     <ClCompile Include="rook.cpp" />
-    <ClCompile Include="space.cpp" />
     <ClCompile Include="test.cpp" />
     <ClCompile Include="testMove.cpp" />
     <ClCompile Include="testPawn.cpp" />

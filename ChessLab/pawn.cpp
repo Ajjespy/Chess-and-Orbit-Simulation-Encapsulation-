@@ -8,9 +8,9 @@
  ************************************************************************/
 
 #include "pawn.h"
-set <int> Pawn::getMoves(const Board* board)
+/*set <int> Pawn::getMoves(const Board* board)
 {
-    /*
+    
     set <int> possible;
 
     
@@ -106,5 +106,11 @@ set <int> Pawn::getMoves(const Board* board)
     }
 
     return possible;
-    */
+   
+} */
+
+
+void Pawn::draw(ogstream& gout)
+{
+	gout.drawPawn(position.getLocation(), fWhite);
 }

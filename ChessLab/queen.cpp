@@ -6,3 +6,9 @@
  * Summary:
  *    A queen on the board.
  ************************************************************************/
+ #include "queen.h"
+
+ void Queen::draw(ogstream& gout)
+{
+	gout.drawQueen(position.getLocation(), fWhite);
+}

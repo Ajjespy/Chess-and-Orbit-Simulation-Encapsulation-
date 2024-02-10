@@ -8,14 +8,17 @@
  ************************************************************************/
 #pragma once
 #include "uiDraw.h"
+#include "uiInteract.h"
 #include "move.h"
-#include "rook.h"
-#include "knight.h"
-#include "bishop.h"
+#include "piece.h"
+#include "space.h"
+#include "pawn.h"
 #include "king.h"
 #include "queen.h"
-#include "pawn.h"
-#include "space.h"
+#include "rook.h"
+#include "bishop.h"
+#include "knight.h"
+
 
 class Board
 {
@@ -29,23 +32,22 @@ public:
 
 	bool whiteTurn()
 	{
-		return true;
+		return currentMove % 2 == 0;
 	}
 
 	void display(Position posHover, Position posSel);
-	Piece getPiece(Position pos);
+
 	void free();
 	void reset();
-	void empty();
 	void clear();
-	void move(Move move);
-	void assign(Position pos, Piece p);
+	void move(int positionFrom, int positionTo);
+	void assign(Position pos, Piece* p);
+	void draw(const Interface& ui);
 
 private:
-	Piece board[64];
-	int currentMove;
+	Piece* board[64];
+	int currentMove = 0;
 	ogstream gout;
-	
 	void swap(Position pos1, Position pos2);
 	void assertBoard();
 };

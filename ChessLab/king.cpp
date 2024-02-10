@@ -6,3 +6,10 @@
  * Summary:
  *    A king on the board.
  ************************************************************************/
+
+#include "king.h"
+
+void King::draw(ogstream& gout)
+{
+	gout.drawKing(position.getLocation(), fWhite);
+}

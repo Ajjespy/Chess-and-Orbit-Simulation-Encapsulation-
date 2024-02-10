@@ -21,8 +21,9 @@ public:
     {
         position = pos;
         fWhite = color;
+        type = pt;
     }
 
-    set <int> getMoves(const Board* board);
-    //void display(ogstream gout);
+    //set <int> getMoves(const Board* board);
+    void draw(ogstream& gout);
 };

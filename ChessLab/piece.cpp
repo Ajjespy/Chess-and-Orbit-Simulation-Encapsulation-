@@ -36,14 +36,6 @@ Piece::Piece(Position p, bool color, PieceType pt)
 	type = pt;
 }
 
-/**************************************
-* PIECE : DISPLAY
-***************************************/
-void Piece::display(ogstream gout)
-{
-	return;
-}
-
 /******************************************
 * PIECE : GETMOVES
 *******************************************/

@@ -15,5 +15,9 @@ public:
 	Space(Position pos, bool color = NULL, PieceType pt = SPACE)
 	{
 		position = pos;
+		fWhite = color;
+		type = pt;
 	}
+
+	void draw(ogstream& gout) { return; }
 };

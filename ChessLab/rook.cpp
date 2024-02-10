@@ -8,3 +8,8 @@
  ************************************************************************/
 
 #include "rook.h"
+
+void Rook::draw(ogstream& gout)
+{
+	gout.drawRook(position.getLocation(), fWhite);
+}
