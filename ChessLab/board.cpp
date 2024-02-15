@@ -71,6 +71,15 @@ void Board::draw(const Interface& ui)
 	gout.drawHover(ui.getHoverPosition());
     gout.drawSelected(ui.getSelectPosition());
 
+    Piece* selectedP = board[ui.getSelectPosition()];
+
+    // selected position is valid
+    if (selectedP->getType() != SPACE)
+    {
+
+    }
+
+
     for(int i = 0; i < 64; i++)
     {
         board[i]->draw(gout);

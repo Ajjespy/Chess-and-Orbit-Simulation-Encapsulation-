@@ -10,11 +10,10 @@
 #include "position.h"
 #include "uiDraw.h"
 #include "pieceType.h"
+#
 #include <set> // for STD::SET
 
 using namespace std;
-
-class Board;
 
 class Piece
 {
@@ -56,18 +55,15 @@ public:
 		return false;
 	}
 
-	// in progress
-	virtual void draw(ogstream& gout) {};
-	virtual set <int> getMoves(const Board& board)
-	{
-		set<int> possible;
-		return possible;
-	}
+	bool ifSlide() { return canSlide; };
 
 	struct RC {
 		int row;
 		int col;
 	};
+
+	PieceType getType() { return type; };
+	virtual void draw(ogstream& gout) {};
 
 protected:
 	Position position;
@@ -75,4 +71,5 @@ protected:
 	int nMoves = 0;
 	int lastMove = -1;
 	PieceType type;
+	bool canSlide;
 };

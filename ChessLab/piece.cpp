@@ -34,4 +34,5 @@ Piece::Piece(Position p, bool color, PieceType pt)
 	position = p;
 	fWhite = color;
 	type = pt;
+	canSlide = false;
 }

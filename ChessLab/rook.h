@@ -8,12 +8,9 @@
  ************************************************************************/
 
 #include "piece.h"
-#include "board.h"
 #pragma once
 
 using namespace std;
-
-class Board;
 
 class Rook : public Piece
 {
@@ -23,8 +20,20 @@ public:
 		position = pos;
 		fWhite = color;
 		type = pt;
+		canSlide = true;
 	}
 
+	RC* getDirections()
+	{
+		RC* moves = new RC[4]{
+			{0, 1},
+			{-1, 0},
+			{1, 0},
+			{0, -1}
+		};
+		return moves;
+	}
+	
 	void draw(ogstream& gout);
-	set <int> getMoves(const Board& board);
+private:
 };

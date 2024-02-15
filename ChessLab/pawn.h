@@ -22,8 +22,12 @@ public:
         position = pos;
         fWhite = color;
         type = pt;
+        canSlide = false;
     }
-
-    set <int> getMoves(const Board* board);
+	set<RC> getMoves();
     void draw(ogstream& gout);
-};
+    bool ifEnpassant() { return canEnpassant; }
+
+private:
+    bool canEnpassant = false;
+}
