@@ -17,14 +17,6 @@ using namespace std;
 class Pawn : public Piece
 {
 public:
-    Pawn(Position pos, bool color, PieceType pt = PAWN)
-    {
-        position = pos;
-        fWhite = color;
-        type = pt;
-        canSlide = false;
-    }
-    set<RC> getMoves();
+    Pawn(Position pos, bool color, PieceType pt = PAWN);
     void draw(ogstream& gout);
-
 };

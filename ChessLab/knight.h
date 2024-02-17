@@ -13,26 +13,7 @@
 class Knight : public Piece
 {
 public:
-	Knight(Position pos, bool color, PieceType pt = KNIGHT)
-	{
-		position = pos;
-		fWhite = color;
-		type = pt;
-		possibleDirections = 8;
-	}
-
+	Knight(Position pos, bool color, PieceType pt = KNIGHT);
 	void draw(ogstream& gout);
-	
-	RC* getDirections()
-	{
-		RC* moves = new RC[8]
-		{
-				 {-1,  2}, { 1,  2},
-		{-2,  1},                    { 2,  1},
-		{-2, -1},                    { 2, -1},
-				 {-1, -2}, { 1, -2}
-		};
-
-		return moves;
-	}
+	RC* getDirections();
 };

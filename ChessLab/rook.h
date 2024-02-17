@@ -15,26 +15,7 @@ using namespace std;
 class Rook : public Piece
 {
 public:
-	Rook(Position pos, bool color, PieceType pt = ROOK)
-	{
-		position = pos;
-		fWhite = color;
-		type = pt;
-		canSlide = true;
-		possibleDirections = 4;
-	}
-	
+	Rook(Position pos, bool color, PieceType pt = ROOK);
 	void draw(ogstream& gout);
-
-	RC* getDirections()
-	{
-		RC* moves = new RC[4]{
-			{0, 1},
-			{-1, 0},
-			{1, 0},
-			{0, -1}
-		};
-
-		return moves;
-	}
+	RC* getDirections();
 };

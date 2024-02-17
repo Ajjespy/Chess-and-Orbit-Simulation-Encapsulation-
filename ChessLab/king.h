@@ -12,25 +12,7 @@
 class King : public Piece
 {
 public:
-	King(Position pos, bool color, PieceType pt = KING)
-	{
-		position = pos;
-		fWhite = color;
-		type = pt;
-		possibleDirections = 8;
-	}
-
-	RC* getDirections()
-	{
-		RC* moves = new RC[8]
-		{
-		   {-1,  1}, {0,  1}, {1,  1},
-		   {-1,  0},          {1,  0},
-		   {-1, -1}, {0, -1}, {1, -1}
-		};
-
-		return moves;
-	}
-
+	King(Position pos, bool color, PieceType pt = KING);
+	RC* getDirections();
 	void draw(ogstream& gout);
 };

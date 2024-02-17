@@ -18,7 +18,7 @@ void PieceTest::constructorWhite() const
 {
 	// SETUP
 	// EXERCISE
-	Piece pawn = Piece(Position(2,0),true,PAWN);
+	Piece pawn = Piece(Position(2,0),false,PAWN);
 	// VERIFY 
 	assert(pawn.getPosition().getRow() == 2);
 	assert(pawn.getPosition().getCol() == 0);
@@ -33,7 +33,7 @@ void PieceTest::constructorBlack() const
 {
 	// SETUP
 	// EXERCISE
-	Piece p = Piece(Position(7, 0), false,PAWN);
+	Piece p = Piece(Position(7, 0), true,PAWN);
 	// VERIFY 
 	assert(p.getPosition().getRow() == 7);
 	assert(p.getPosition().getCol() == 0);
