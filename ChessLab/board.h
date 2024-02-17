@@ -133,22 +133,29 @@ private:
 					moves.insert(m);  // attack right
 				}
 
-				//// what about en-passant and pawn promotion
-				//if (r == 3)
-				//{
-				//	cc = c - 1;
-				//	if (board[r * 8 + cc]->getType() == PAWN && board[r * 8 + cc]->isWhite() && (r * 8 + cc) == lastMoved()) // compare directly laater
-				//	{
-				//		possible.insert(r * 8 + cc);
-				//	};    // attack left
+				// what about en-passant and pawn promotion
+				if (r == 3)
+				{
+					cc = c - 1;
+					if (board[r * 8 + cc]->getType() == PAWN && !board[r * 8 + cc]->isBlack() && (r * 8 + cc) == lastMoved())
+					{
+						m.setSrc(currPiece->getPosition());
+						m.setDes(board[r * 8 + cc]->getPosition());
+						m.setEnPassant();
+						moves.insert(m);  // attack leftt
+						
+					};  
 
-				//	cc = c + 1;
-				//	if (board[r * 8 + cc]->getType() == PAWN && board[r * 8 + cc]->isWhite() && (r * 8 + cc) == lastMoved())
-				//	{
-				//		possible.insert(r * 8 + cc);
-				//	};  // attack right)
+					cc = c + 1;
+					if (board[r * 8 + cc]->getType() == PAWN && !board[r * 8 + cc]->isBlack() && (r * 8 + cc) == lastMoved())
+					{
+						m.setSrc(currPiece->getPosition());
+						m.setDes(board[r * 8 + cc]->getPosition());
+						m.setEnPassant();
+						moves.insert(m);
+					};  // attack right)
 
-				//};
+				};
 
 			}
 
@@ -190,21 +197,27 @@ private:
 				}
 
 
-				//// what about en-passant and pawn promotion
-				//if (r == 4)
-				//{
-				//	cc = c - 1;
-				//	if (board[r * 8 + cc]->getType() == PAWN && !board[r * 8 + cc]->isWhite() && (r * 8 + cc) == lastMoved())
-				//	{
-				//		possible.insert(rr * 8 + cc);
-				//	};    // attack left
+				 //what about en-passant and pawn promotion
+				if (r == 4)
+				{
+					cc = c - 1;
+					if (board[r * 8 + cc]->getType() == PAWN && board[r * 8 + cc]->isBlack() && (r * 8 + cc) == lastMoved())
+					{
+						m.setSrc(currPiece->getPosition());
+						m.setDes(board[r * 8 + cc]->getPosition());
+						m.setEnPassant();
+						moves.insert(m); // attack left
+					};    
 
-				//	cc = c + 1;
-				//	if (board[r * 8 + cc]->getType() == PAWN && !board[r * 8 + cc]->isWhite() && (r * 8 + cc) == lastMoved())
-				//	{
-				//		possible.insert(r * 8 + c);
-				//	};  // attack right)
-				//};
+					cc = c + 1;
+					if (board[r * 8 + cc]->getType() == PAWN && board[r * 8 + cc]->isBlack() && (r * 8 + cc) == lastMoved())
+					{
+						m.setSrc(currPiece->getPosition());
+						m.setDes(board[r * 8 + cc]->getPosition());
+						m.setEnPassant();
+						moves.insert(m);  // attack right)
+					};  
+				};
 
 			}
 		}
@@ -226,13 +239,7 @@ private:
 					}
 					else
 					{
-						if (currPiece->isBlack() && !board[rr * 8 + cc]->isBlack())
-						{
-							m.setSrc(currPiece->getPosition());
-							m.setDes(board[rr * 8 + cc]->getPosition());
-							moves.insert(m);
-						}
-						if (!currPiece->isBlack() && board[rr * 8 + cc]->isBlack())
+						if (currPiece->isBlack() != board[rr * 8 + cc]->isBlack())
 						{
 							m.setSrc(currPiece->getPosition());
 							m.setDes(board[rr * 8 + cc]->getPosition());
@@ -244,25 +251,67 @@ private:
 				rr = r;
 				cc = c;
 			}
+		}
 
-			// castling
-			if (currPiece->getType() == KING)
+#ifdef DEBUG
+		// castling
+		if (currPiece->getType() == KING)
+		{
+			if (!currPiece->isBlack())
 			{
-				// castling
-				if (currPiece->getType() == KING)
+				// white side, queen side
+				if (currPiece->getNMoves() == 0 && board[0]->getType() == ROOK && board[0]->getNMoves() == 0)
 				{
-					// black side, queen side
-					if (currPiece->getNMoves() == 0 && board[0]->getType() == ROOK && board[0]->getNMoves() == 0)
+					// check to make sure spots in between are open
+					if (board[1]->getType() == SPACE && board[2]->getType() == SPACE && board[3]->getType() == SPACE)
 					{
-						// check to make sure spots in between are open
-						if (board[1]->getType() == SPACE && board[2]->getType() == SPACE && board[3]->getType() == SPACE)
-						{
-
-						}
+						m.setSrc(currPiece->getPosition());
+						m.setDes(board[1]->getPosition());
+						m.setCastle(false);
+						moves.insert(m);
 					}
-
+				}
+				// white side, king side
+				if (currPiece->getNMoves() == 0 && board[7]->getType() == ROOK && board[7]->getNMoves() == 0)
+				{
+					// check to make sure spots in between are open
+					if (board[5]->getType() == SPACE && board[6]->getType() == SPACE)
+					{
+						m.setSrc(currPiece->getPosition());
+						m.setDes(board[6]->getPosition());
+						m.setCastle(true);
+						moves.insert(m);
+					}
+				}
+			}
+			else
+			{
+				// black side, queen side
+				if (currPiece->getNMoves() == 0 && board[0]->getType() == ROOK && board[0]->getNMoves() == 0)
+				{
+					// check to make sure spots in between are open
+					if (board[57]->getType() == SPACE && board[58]->getType() == SPACE && board[59]->getType() == SPACE)
+					{
+						m.setSrc(currPiece->getPosition());
+						m.setDes(board[57]->getPosition());
+						m.setCastle(false);
+						moves.insert(m);
+					}
+				}
+				// white side, king side
+				if (currPiece->getNMoves() == 0 && board[7]->getType() == ROOK && board[7]->getNMoves() == 0)
+				{
+					// check to make sure spots in between are open
+					if (board[61]->getType() == SPACE && board[62]->getType() == SPACE)
+					{
+						m.setSrc(currPiece->getPosition());
+						m.setDes(board[62]->getPosition());
+						m.setCastle(true);
+						moves.insert(m);
+					}
 				}
 			}
 		}
+#endif // DEBUG
 	}
 };
