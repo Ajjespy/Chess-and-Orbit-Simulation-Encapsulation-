@@ -21,7 +21,10 @@ public:
 		fWhite = color;
 		type = pt;
 		canSlide = true;
+		possibleDirections = 4;
 	}
+	
+	void draw(ogstream& gout);
 
 	RC* getDirections()
 	{
@@ -31,9 +34,9 @@ public:
 			{1, 0},
 			{0, -1}
 		};
+
 		return moves;
 	}
 	
-	void draw(ogstream& gout);
 private:
 };

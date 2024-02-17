@@ -131,6 +131,9 @@
     <ClInclude Include="space.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="rc.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

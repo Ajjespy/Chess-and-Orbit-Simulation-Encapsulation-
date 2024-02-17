@@ -10,7 +10,7 @@
 #include "position.h"
 #include "uiDraw.h"
 #include "pieceType.h"
-#
+#include "rc.h"
 #include <set> // for STD::SET
 
 using namespace std;
@@ -22,12 +22,12 @@ public:
 	Piece(Position p, bool color, PieceType pt);
 	Piece() {};
 
-	void assignPos(Position pos);
-
 	bool isWhite()
 	{
 		return fWhite;
 	}
+
+	void assignPos(Position pos);
 
 	// In progress
 	bool isMove()
@@ -55,21 +55,48 @@ public:
 		return false;
 	}
 
+	bool isValid()
+	{
+		if (type == SPACE)
+		{
+			return false;
+		}
+		return true;
+	}
+
+	virtual RC* getDirections()
+	{
+		RC* moves = new RC[4]{
+			{0, 1},
+			{-1, 0},
+			{1, 0},
+			{0, -1}
+		};
+
+		return moves;
+	}
+
 	bool ifSlide() { return canSlide; };
 
-	struct RC {
-		int row;
-		int col;
-	};
-
-	PieceType getType() { return type; };
 	virtual void draw(ogstream& gout) {};
+
+	int getLengthOfDirections()
+	{
+		return possibleDirections;
+	}
+
+	PieceType getType()
+	{
+		return type;
+	}
+	
 
 protected:
 	Position position;
-	bool fWhite;
+	bool fWhite = false;
 	int nMoves = 0;
 	int lastMove = -1;
-	PieceType type;
-	bool canSlide;
+	PieceType type = SPACE;
+	bool canSlide = false;
+	int possibleDirections = 4;
 };

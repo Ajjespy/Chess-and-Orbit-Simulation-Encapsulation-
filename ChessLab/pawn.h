@@ -24,10 +24,10 @@ public:
         type = pt;
         canSlide = false;
     }
-	set<RC> getMoves();
+    set<RC> getMoves();
     void draw(ogstream& gout);
     bool ifEnpassant() { return canEnpassant; }
 
 private:
     bool canEnpassant = false;
-}
+};

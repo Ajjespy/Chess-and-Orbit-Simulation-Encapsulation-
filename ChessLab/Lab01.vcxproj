@@ -128,6 +128,7 @@
     <ClInclude Include="pieceType.h" />
     <ClInclude Include="position.h" />
     <ClInclude Include="queen.h" />
+    <ClInclude Include="rc.h" />
     <ClInclude Include="rook.h" />
     <ClInclude Include="space.h" />
     <ClInclude Include="test.h" />

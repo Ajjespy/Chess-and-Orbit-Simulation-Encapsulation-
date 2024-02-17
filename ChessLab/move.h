@@ -12,7 +12,7 @@
 #include <string>
 #include "position.h"  // Every move has two Positions as attributes
 #include "pieceType.h" // A piece type
-#include "board.h"
+//#include "board.h"
 
 
 
@@ -47,6 +47,7 @@ class Move
       bool operator != (const string & rhs) const { return getText() != rhs; }
       bool operator != (const Move & rhs)   const { return !(*this == rhs); }
       bool operator <  (const Move & rhs)   const { return dest.getLocation() < rhs.dest.getLocation(); }
+	  bool operator >  (const Move& rhs)   const { return dest.getLocation() > rhs.dest.getLocation(); }
 
       // setters
       void setCapture(PieceType pt)     { capture    = pt;  }

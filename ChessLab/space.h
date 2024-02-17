@@ -17,6 +17,15 @@ public:
 		position = pos;
 		fWhite = color;
 		type = pt;
+		possibleDirections = 0;
+	}
+
+
+	RC* getDirections()
+	{
+		RC* moves = new RC[0]{
+		};
+		return moves;
 	}
 
 	void draw(ogstream& gout) { return; }

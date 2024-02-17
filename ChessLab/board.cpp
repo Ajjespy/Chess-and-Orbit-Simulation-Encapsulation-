@@ -71,26 +71,30 @@ void Board::draw(const Interface& ui)
 	gout.drawHover(ui.getHoverPosition());
     gout.drawSelected(ui.getSelectPosition());
 
-    Piece* selectedP = board[ui.getSelectPosition()];
-
-    // selected position is valid
-    if (selectedP->getType() != SPACE)
+    if (ui.getSelectPosition() != -1)
     {
+        Piece* selectedP = board[ui.getSelectPosition()];
 
+        if (selectedP->isValid())
+        {
+            set<int> possibleMoves =convertDirectionToMove(selectedP->getDirections(),selectedP->getLengthOfDirections(),selectedP);
+            set <int> ::iterator it;
+            for (it = possibleMoves.begin(); it != possibleMoves.end(); ++it)
+                gout.drawPossible(*it);
+        }
     }
-
 
     for(int i = 0; i < 64; i++)
     {
         board[i]->draw(gout);
     }
-
-    
 }
 
 
 void Board::move(int positionFrom, int positionTo)
 {
+    // if valid move
+    
     assign(Position(positionTo), board[positionFrom]);
     board[positionFrom]->assignPos(positionTo);
     assign(Position(positionFrom), new Space(Position(positionFrom)));

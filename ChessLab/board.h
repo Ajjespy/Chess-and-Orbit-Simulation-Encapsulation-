@@ -19,6 +19,7 @@
 #include "bishop.h"
 #include "knight.h"
 
+using namespace std;
 
 class Board
 {
@@ -35,81 +36,149 @@ public:
 		return currentMove % 2 == 0;
 	}
 
-	bool isFree(int location)
-	{
-		Piece* p = board[location];
-		if (p->getType() == SPACE)
-		{
-			return true;
-		}
-		return false;
-	}
-	struct RC {
-		int row;
-		int col;
-	};
-
 	void reset();
 	void clear();
 	void move(int positionFrom, int positionTo);
 	void assign(Position pos, Piece* p);
 	void draw(const Interface& ui);
-	int lastMoved() { return last; };
-	//const Piece& operator [] 
+	
+	// change to move once we implement move class
+	int lastMoved() { return 20; };
 
 private:
 	Piece* board[64];
 	int currentMove = 0;
 	ogstream gout;
 	void swap(Position pos1, Position pos2);
-	int last;
+	Move last = Move();
 	set <Move> moves;
 
-	set<Move> convertDirectionToMove(RC* directions, const Position& p)
+	set<int> convertDirectionToMove(RC* movesArrayP, int length, Piece* currPiece)
 	{
-		Move check = Move();
-		check.setSrc(p);
-		Position posCheck = p;
+		set<int> possible;
+		int c = currPiece->getPosition().getCol(); //current column
+		int r = currPiece->getPosition().getRow(); //current row 
+		int cc = c;
+		int rr = r;
 
-		if (board[p.getLocation()]->ifSlide())
+		// bishops, rooks, queen
+		if (currPiece->ifSlide())
 		{
-			for (int i = 0; i < directions->; i++)
+			for (int i = 0; i < length; i++)
 			{
-				posCheck.setRow(p.getRow() + directions[i].row);
-				posCheck.setCol(p.getCol() + directions[i].col);
-				while(board[posCheck.getLocation()].getType() == SPACE)
+				rr += movesArrayP[i].row;
+				cc += movesArrayP[i].col;
+				if ((rr * 8 + cc) >= 0 && (rr * 8 + cc) < 64)
 				{
-					check.setDes(posCheck);
-					moves.insert(check);
-					posCheck.setRow(posCheck.getRow() + directions[i].row);
-					posCheck.setCol(posCheck.getCol() + directions[i].col);
+					while (board[rr * 8 + cc]->getType() == SPACE)
+					{
+						possible.insert(rr * 8 + cc);
+						rr += movesArrayP[i].row;
+						cc += movesArrayP[i].col;
+					}
 				}
-				if (board[p.getLocation()]->isWhite() != board[posCheck.getLocation()]->isWhite())
-				{
-					check.setDes(posCheck);
-					moves.insert(check);
-				}
+
+				// if (board[r * 8 + c]->isWhite() != board[rr * 8 + cc]->isWhite())
+				// {
+				// 	possible.insert(rr * 8 + cc);
+				// }
+				//else if (!currPiece->isWhite() && board[rr * 8 + cc]->isWhite())
+				//{
+				//	possible.insert(rr * 8 + cc);
+				//}
+				rr = r;
+				cc = c;
 			}
 		}
-		else
+
+		// pawn
+		else if (currPiece->getType() == PAWN)
 		{
-			for (int i = 0; i < directions.size(); i++)
+			if (!currPiece->isWhite()) // black pawn
 			{
-				posCheck.setRow(p.getRow() + directions[i].row);
-				posCheck.setCol(p.getCol() + directions[i].col);
-				if (board[posCheck.getLocation()].getType() == SPACE)
+				rr = r - 2;  //row is r
+				if (currPiece->getNMoves() == 0)
 				{
-					check.setDes(posCheck);
-					moves.insert(check);
+					if (r == 6 && board[rr * 8 + cc]->getType() == SPACE && board[(r - 1) * 8 + cc]->getType() == SPACE)
+					{
+						possible.insert(rr * 8 + cc);  // forward two blank spaces
+					};
+				};
+
+				rr = r - 1;
+				if (rr >= 0 && board[r * 8 + c]->getType() == SPACE) {
+					possible.insert(rr * 8 + cc);  // forward one blank space
 				}
-				else if (board[p.getLocation()]->isWhite() != board[posCheck.getLocation()]->isWhite())
+
+				cc = c - 1;
+				if (board[rr * 8 + cc]->isWhite())
+					possible.insert(rr * 8 + cc);    // attack left
+
+				cc = c + 1;
+				if (board[rr * 8 + cc]->isWhite())
+					possible.insert(r * 8 + c);    // attack right
+
+				// what about en-passant and pawn promotion
+				if (r == 3)
 				{
-					check.setDes(posCheck);
-					check.setCapture(board[posCheck.getLocation()]->getType());
-					moves.insert(check);
-					check.setCapture(SPACE);
-				}
+					cc = c - 1;
+					if (board[r * 8 + cc]->getType() == PAWN && board[r * 8 + cc]->isWhite() && (r * 8 + cc) == lastMoved()) // compare directly laater
+					{
+						possible.insert(r * 8 + cc);
+					};    // attack left
+
+					cc = c + 1;
+					if (board[r * 8 + cc]->getType() == PAWN && board[r * 8 + cc]->isWhite() && (r * 8 + cc) == lastMoved())
+					{
+						possible.insert(r * 8 + cc);
+					};  // attack right)
+
+				};
+
+			}
+
+			if (currPiece->isWhite()) //white pawn
+			{
+				rr = r + 2; //row is r
+				if (currPiece->getNMoves() == 0)
+				{
+					if (r == 1 && board[rr * 8 + cc]->getType() == SPACE && board[(r + 1) * 8 + cc]->getType() == SPACE)
+					{
+						possible.insert(rr * 8 + cc);  // forward two blank spaces
+					};
+				};
+
+				rr = r + 1;
+				if (rr <= 7 && board[rr * 8 + cc]->getType() == SPACE)
+					possible.insert(r * 8 + c);  // forward one blank space
+
+				cc = c - 1;
+				if (!board[rr * 8 + cc]->isWhite())
+					possible.insert(rr * 8 + cc);    // attack left
+
+				cc = c + 1;
+				if (!board[rr * 8 + cc]->isWhite())
+					possible.insert(r * 8 + c);    // attack right
+
+				// what about en-passant and pawn promotion
+				if (r == 4)
+				{
+					cc = c - 1;
+					if (board[r * 8 + cc]->getType() == PAWN && !board[r * 8 + cc]->isWhite() && (r * 8 + cc) == lastMoved())
+					{
+						possible.insert(rr * 8 + cc);
+					};    // attack left
+
+					cc = c + 1;
+					if (board[r * 8 + cc]->getType() == PAWN && !board[r * 8 + cc]->isWhite() && (r * 8 + cc) == lastMoved())
+					{
+						possible.insert(r * 8 + c);
+					};  // attack right)
+				};
+
 			}
 		}
+
+		return possible;
 	}
 };

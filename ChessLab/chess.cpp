@@ -340,11 +340,9 @@ void callBack(Interface *pUI, void* p)
    draw(board, *pUI, possible);
    */
     Board* board = (Board*)p;
-    //board->getPiece(pUI->getSelectPosition());
 
     if (pUI->getPreviousPosition()!= -1 && pUI->getSelectPosition() != -1)
     {
-
 		board->move(pUI->getPreviousPosition(), pUI->getSelectPosition());
 		pUI->clearSelectPosition();
     }

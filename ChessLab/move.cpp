@@ -9,7 +9,7 @@
 
 #include "move.h"
 #include "piece.h"
-#include "board.h"
+//#include "board.h"
 #include <cassert>
 #include <iostream>
 #include <sstream>
@@ -21,7 +21,8 @@ using namespace std;
  ***************************************************/
 Move::Move() :
       promote(SPACE),       capture(SPACE),       enpassant(false),
-      castleK(false),     castleQ(false),       isWhite(true)
+      castleK(false),     castleQ(false),       isWhite(true),
+      source(Position()), dest(Position())
 {
 }
 
