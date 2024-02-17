@@ -61,7 +61,7 @@ private:
 		int cc = c;
 		int rr = r;
 
-		// bishops, rooks, queen
+		// bishops, rooks, queens
 		if (currPiece->ifSlide())
 		{
 			for (int i = 0; i < length; i++)
@@ -70,22 +70,24 @@ private:
 				cc += movesArrayP[i].col;
 				if ((rr * 8 + cc) >= 0 && (rr * 8 + cc) < 64)
 				{
-					while (board[rr * 8 + cc]->getType() == SPACE)
+					while (rr >= 0 && rr < 8 && cc >= 0 && cc < 8 &&
+						board[rr * 8 + cc]->getType() == SPACE)
 					{
 						possible.insert(rr * 8 + cc);
 						rr += movesArrayP[i].row;
 						cc += movesArrayP[i].col;
 					}
-				}
+					 
+					if (currPiece->isBlack() && !board[rr * 8 + cc]->isBlack())
+					 {
+ 						possible.insert(rr * 8 + cc);
+					 }
 
-				// if (board[r * 8 + c]->isWhite() != board[rr * 8 + cc]->isWhite())
-				// {
-				// 	possible.insert(rr * 8 + cc);
-				// }
-				//else if (!currPiece->isWhite() && board[rr * 8 + cc]->isWhite())
-				//{
-				//	possible.insert(rr * 8 + cc);
-				//}
+					if (!currPiece->isBlack() && board[rr * 8 + cc]->isBlack())
+					{
+						possible.insert(rr * 8 + cc);
+					}
+				}
 				rr = r;
 				cc = c;
 			}
@@ -94,7 +96,7 @@ private:
 		// pawn
 		else if (currPiece->getType() == PAWN)
 		{
-			if (!currPiece->isWhite()) // black pawn
+			if (currPiece->isBlack()) // black pawn
 			{
 				rr = r - 2;  //row is r
 				if (currPiece->getNMoves() == 0)
@@ -106,38 +108,44 @@ private:
 				};
 
 				rr = r - 1;
-				if (rr >= 0 && board[r * 8 + c]->getType() == SPACE) {
-					possible.insert(rr * 8 + cc);  // forward one blank space
+				if (rr >= 0 && board[rr * 8 + cc]->getType() == SPACE) 
+				{
+					possible.insert(rr * 8 + cc);
+						// forward one blank space
 				}
 
 				cc = c - 1;
-				if (board[rr * 8 + cc]->isWhite())
+				if (!board[rr * 8 + cc]->isBlack() && board[rr * 8 + cc]->getType() != SPACE)
+				{
 					possible.insert(rr * 8 + cc);    // attack left
+				}
 
 				cc = c + 1;
-				if (board[rr * 8 + cc]->isWhite())
-					possible.insert(r * 8 + c);    // attack right
-
-				// what about en-passant and pawn promotion
-				if (r == 3)
+				if (!board[rr * 8 + cc]->isBlack() && board[rr * 8 + cc]->getType() != SPACE)
 				{
-					cc = c - 1;
-					if (board[r * 8 + cc]->getType() == PAWN && board[r * 8 + cc]->isWhite() && (r * 8 + cc) == lastMoved()) // compare directly laater
-					{
-						possible.insert(r * 8 + cc);
-					};    // attack left
+					possible.insert(rr * 8 + cc);    // attack right
+				}
 
-					cc = c + 1;
-					if (board[r * 8 + cc]->getType() == PAWN && board[r * 8 + cc]->isWhite() && (r * 8 + cc) == lastMoved())
-					{
-						possible.insert(r * 8 + cc);
-					};  // attack right)
+				//// what about en-passant and pawn promotion
+				//if (r == 3)
+				//{
+				//	cc = c - 1;
+				//	if (board[r * 8 + cc]->getType() == PAWN && board[r * 8 + cc]->isWhite() && (r * 8 + cc) == lastMoved()) // compare directly laater
+				//	{
+				//		possible.insert(r * 8 + cc);
+				//	};    // attack left
 
-				};
+				//	cc = c + 1;
+				//	if (board[r * 8 + cc]->getType() == PAWN && board[r * 8 + cc]->isWhite() && (r * 8 + cc) == lastMoved())
+				//	{
+				//		possible.insert(r * 8 + cc);
+				//	};  // attack right)
+
+				//};
 
 			}
 
-			if (currPiece->isWhite()) //white pawn
+			else if (!currPiece->isBlack()) //white pawn
 			{
 				rr = r + 2; //row is r
 				if (currPiece->getNMoves() == 0)
@@ -150,32 +158,75 @@ private:
 
 				rr = r + 1;
 				if (rr <= 7 && board[rr * 8 + cc]->getType() == SPACE)
-					possible.insert(r * 8 + c);  // forward one blank space
+				{
+					possible.insert(rr * 8 + cc);   //forward one blank space
+				}
 
 				cc = c - 1;
-				if (!board[rr * 8 + cc]->isWhite())
+				if (board[rr * 8 + cc]->isBlack() && board[rr * 8 + cc]->getType() != SPACE)
+				{
 					possible.insert(rr * 8 + cc);    // attack left
+				}
 
 				cc = c + 1;
-				if (!board[rr * 8 + cc]->isWhite())
-					possible.insert(r * 8 + c);    // attack right
-
-				// what about en-passant and pawn promotion
-				if (r == 4)
+				if (board[rr * 8 + cc]->isBlack() && board[rr * 8 + cc]->getType() != SPACE)
 				{
-					cc = c - 1;
-					if (board[r * 8 + cc]->getType() == PAWN && !board[r * 8 + cc]->isWhite() && (r * 8 + cc) == lastMoved())
+					possible.insert(rr * 8 + cc);    // attack right
+				}
+					
+
+				//// what about en-passant and pawn promotion
+				//if (r == 4)
+				//{
+				//	cc = c - 1;
+				//	if (board[r * 8 + cc]->getType() == PAWN && !board[r * 8 + cc]->isWhite() && (r * 8 + cc) == lastMoved())
+				//	{
+				//		possible.insert(rr * 8 + cc);
+				//	};    // attack left
+
+				//	cc = c + 1;
+				//	if (board[r * 8 + cc]->getType() == PAWN && !board[r * 8 + cc]->isWhite() && (r * 8 + cc) == lastMoved())
+				//	{
+				//		possible.insert(r * 8 + c);
+				//	};  // attack right)
+				//};
+
+			}
+		}
+
+        // knight and king
+		else if (currPiece->getType() == KNIGHT || currPiece->getType() == KING)
+		{
+			for (int i = 0; i < length; i++)
+			{
+				rr += movesArrayP[i].row;
+				cc += movesArrayP[i].col;
+				if (rr >= 0 && rr < 8 && cc >= 0 && cc < 8)
+				{
+					if (board[rr * 8 + cc]->getType() == SPACE)
 					{
 						possible.insert(rr * 8 + cc);
-					};    // attack left
-
-					cc = c + 1;
-					if (board[r * 8 + cc]->getType() == PAWN && !board[r * 8 + cc]->isWhite() && (r * 8 + cc) == lastMoved())
+					}
+					else
 					{
-						possible.insert(r * 8 + c);
-					};  // attack right)
-				};
+						if (currPiece->isBlack() && !board[rr * 8 + cc]->isBlack())
+						{
+							possible.insert(rr * 8 + cc);
+						}
+						if (!currPiece->isBlack() && board[rr * 8 + cc]->isBlack())
+						{
+							possible.insert(rr * 8 + cc);
+						}
+					}
+				
+				}
+				rr = r;
+				cc = c;
+			}
 
+			// castling
+			if (currPiece->getType() == KING)
+			{
 			}
 		}
 

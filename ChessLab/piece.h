@@ -22,7 +22,7 @@ public:
 	Piece(Position p, bool color, PieceType pt);
 	Piece() {};
 
-	bool isWhite()
+	bool isBlack()
 	{
 		return fWhite;
 	}
@@ -93,9 +93,8 @@ public:
 
 protected:
 	Position position;
-	bool fWhite = false;
+	bool fWhite = false; // false is equal to white, true is equal to black
 	int nMoves = 0;
-	int lastMove = -1;
 	PieceType type = SPACE;
 	bool canSlide = false;
 	int possibleDirections = 4;
