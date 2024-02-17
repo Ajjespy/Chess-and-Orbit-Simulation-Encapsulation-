@@ -266,7 +266,7 @@ void Board::convertDirectionToMove(RC* movesArrayP, int length, Piece* currPiece
 			}
 
 			cc = c - 1;
-			if (!board[rr * 8 + cc]->isBlack() && board[rr * 8 + cc]->getType() != SPACE)
+			if (rr >= 0 && cc >= 0 && cc < 8 && !board[rr * 8 + cc]->isBlack() && board[rr * 8 + cc]->getType() != SPACE)
 			{
 				m.setSrc(currPiece->getPosition());
 				m.setDes(board[rr * 8 + cc]->getPosition());
@@ -274,7 +274,7 @@ void Board::convertDirectionToMove(RC* movesArrayP, int length, Piece* currPiece
 			}
 
 			cc = c + 1;
-			if (!board[rr * 8 + cc]->isBlack() && board[rr * 8 + cc]->getType() != SPACE)
+			if (rr >= 0 && cc >= 0 && cc < 8 && !board[rr * 8 + cc]->isBlack() && board[rr * 8 + cc]->getType() != SPACE)
 			{
 				m.setSrc(currPiece->getPosition());
 				m.setDes(board[rr * 8 + cc]->getPosition());
@@ -286,7 +286,7 @@ void Board::convertDirectionToMove(RC* movesArrayP, int length, Piece* currPiece
 			{
 				cc = c - 1;
 				rr = r - 1;
-				if (board[r * 8 + cc]->getType() == PAWN && !board[r * 8 + cc]->isBlack() && Position(r * 8 + cc) == last.getDes())
+				if (rr >= 0 && rr < 8 && cc >= 0 && cc < 8 && board[r * 8 + cc]->getType() == PAWN && !board[r * 8 + cc]->isBlack() && Position(r * 8 + cc) == last.getDes())
 				{
 					m.setSrc(currPiece->getPosition());
 					m.setDes(board[rr * 8 + cc]->getPosition());
@@ -296,7 +296,7 @@ void Board::convertDirectionToMove(RC* movesArrayP, int length, Piece* currPiece
 				};
 
 				cc = c + 1;
-				if (board[r * 8 + cc]->getType() == PAWN && !board[r * 8 + cc]->isBlack() && Position(r * 8 + cc) == last.getDes())
+				if (rr >= 0 && rr < 8 && cc >= 0 && cc < 8 && board[r * 8 + cc]->getType() == PAWN && !board[r * 8 + cc]->isBlack() && Position(r * 8 + cc) == last.getDes())
 				{
 					m.setSrc(currPiece->getPosition());
 					m.setDes(board[rr * 8 + cc]->getPosition());
@@ -330,7 +330,7 @@ void Board::convertDirectionToMove(RC* movesArrayP, int length, Piece* currPiece
 			}
 
 			cc = c - 1;
-			if (board[rr * 8 + cc]->isBlack() && board[rr * 8 + cc]->getType() != SPACE)
+			if (rr < 8 && cc >= 0 && cc < 8 && board[rr * 8 + cc]->isBlack() && board[rr * 8 + cc]->getType() != SPACE)
 			{
 				m.setSrc(currPiece->getPosition());
 				m.setDes(board[rr * 8 + cc]->getPosition());
@@ -338,7 +338,7 @@ void Board::convertDirectionToMove(RC* movesArrayP, int length, Piece* currPiece
 			}
 
 			cc = c + 1;
-			if (board[rr * 8 + cc]->isBlack() && board[rr * 8 + cc]->getType() != SPACE)
+			if (rr < 8 && cc >= 0 && cc < 8 && board[rr * 8 + cc]->isBlack() && board[rr * 8 + cc]->getType() != SPACE)
 			{
 				m.setSrc(currPiece->getPosition());
 				m.setDes(board[rr * 8 + cc]->getPosition());
@@ -351,7 +351,7 @@ void Board::convertDirectionToMove(RC* movesArrayP, int length, Piece* currPiece
 			{
 				cc = c - 1;
 				rr = r + 1;
-				if (board[r * 8 + cc]->getType() == PAWN && board[r * 8 + cc]->isBlack() && Position(r * 8 + cc) == last.getDes())
+				if (cc >= 0 && cc < 8 && board[r * 8 + cc]->getType() == PAWN && board[r * 8 + cc]->isBlack() && Position(r * 8 + cc) == last.getDes())
 				{
 					m.setSrc(currPiece->getPosition());
 					m.setDes(board[rr * 8 + cc]->getPosition());
@@ -360,7 +360,7 @@ void Board::convertDirectionToMove(RC* movesArrayP, int length, Piece* currPiece
 				};
 
 				cc = c + 1;
-				if (board[r * 8 + cc]->getType() == PAWN && board[r * 8 + cc]->isBlack() && Position(r * 8 + cc) == last.getDes())
+				if (cc >= 0 && cc < 8 && board[r * 8 + cc]->getType() == PAWN && board[r * 8 + cc]->isBlack() && Position(r * 8 + cc) == last.getDes())
 				{
 					m.setSrc(currPiece->getPosition());
 					m.setDes(board[rr * 8 + cc]->getPosition());
