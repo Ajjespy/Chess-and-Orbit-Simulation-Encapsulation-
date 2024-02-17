@@ -70,23 +70,20 @@ private:
 				cc += movesArrayP[i].col;
 				if ((rr * 8 + cc) >= 0 && (rr * 8 + cc) < 64)
 				{
-					while (rr >= 0 && rr < 8 && cc >= 0 && cc < 8 &&
-						board[rr * 8 + cc]->getType() == SPACE)
+					while (rr >= 0 && rr < 8 && cc >= 0 && cc < 8 && board[rr * 8 + cc]->getType() == SPACE)
+					{
+							possible.insert(rr * 8 + cc);
+							rr += movesArrayP[i].row;
+							cc += movesArrayP[i].col;
+					}
+						
+					if (rr >= 0 && rr < 8 && cc >= 0 && cc < 8 && board[r * 8 + c]->isBlack() != board[rr * 8 + cc]->isBlack())
 					{
 						possible.insert(rr * 8 + cc);
-						rr += movesArrayP[i].row;
-						cc += movesArrayP[i].col;
 					}
 				}
 
-				// if (board[r * 8 + c]->isWhite() != board[rr * 8 + cc]->isWhite())
-				// {
-				// 	possible.insert(rr * 8 + cc);
-				// }
-				//else if (!currPiece->isWhite() && board[rr * 8 + cc]->isWhite())
-				//{
-				//	possible.insert(rr * 8 + cc);
-				//}
+				
 				rr = r;
 				cc = c;
 			}
