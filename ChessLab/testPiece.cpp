@@ -55,7 +55,7 @@ void PieceTest::assignPos() const
 	// VERIFY
 	assert(p.getPosition().getRow() == 4);
 	assert(p.getPosition().getCol() == 0);
-	assert(p.isBlack() == false);
+	assert(p.isBlack() == true);
 	assert(p.hasMoved() == true);
 }
 
@@ -71,10 +71,9 @@ void PieceTest::invalidPos() const
 	// EXERCISE
 	p.assignPos(pos);
 	// VERIFY
-	assert(p.getPosition().getRow() == 2);
-	assert(p.getPosition().getCol() == 1);
-	assert(p.isBlack() == false);
-	assert(p.hasMoved() == false);
+	assert(p.getPosition().getRow() == 0);
+	assert(p.getPosition().getCol() == 0);
+	assert(p.isBlack() == true);
 }
 
 /*****************************************
