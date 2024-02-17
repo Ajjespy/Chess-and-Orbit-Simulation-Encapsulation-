@@ -14,7 +14,7 @@
 ***************************************/
 void Piece::assignPos(Position pos)
 {
-	if (pos.getRow() > 8 || pos.getRow() < 1)
+	if (pos.getRow() > 7 || pos.getRow() < 0)
 	{
 		return;
 	}

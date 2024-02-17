@@ -90,13 +90,22 @@ public:
 		return type;
 	}
 	
+	const Piece& operator = (const Piece& rhs)
+	{
+		Position position = rhs.position;
+		bool fWhite = rhs.fWhite;
+		int nMoves = rhs.nMoves;
+		PieceType type = rhs.type;
+		bool canSlide = rhs.canSlide;
+		int possibleDirections = rhs.possibleDirections;
+	}
 
 protected:
 	Position position;
 	bool fWhite = false;
 	int nMoves = 0;
-	int lastMove = -1;
 	PieceType type = SPACE;
 	bool canSlide = false;
 	int possibleDirections = 4;
+
 };

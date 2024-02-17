@@ -26,8 +26,5 @@ public:
     }
     set<RC> getMoves();
     void draw(ogstream& gout);
-    bool ifEnpassant() { return canEnpassant; }
 
-private:
-    bool canEnpassant = false;
 };

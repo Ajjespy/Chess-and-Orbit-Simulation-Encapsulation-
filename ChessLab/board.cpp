@@ -42,10 +42,10 @@ void Board::reset()
 	assign(Position(5), new Bishop(Position(5), false));
     assign(Position(6), new Knight(Position(6), false));
     assign(Position(7), new Rook(Position(7), false));
-
+    
 	for (int i = 8; i < 16; i++)
 	{
-		board[i] = new Pawn(Position(i), false);
+        assign(Position(i), new Pawn(Position(i), false));
 	}
 
     //Black pieces;
@@ -60,7 +60,7 @@ void Board::reset()
 
    for (int i = 48; i < 56; i++)
     {
-        board[i] = new Pawn(Position(i), true);
+       assign(Position(i), new Pawn(Position(i), true));
     }
 }
  
@@ -96,6 +96,6 @@ void Board::move(int positionFrom, int positionTo)
     // if valid move
     
     assign(Position(positionTo), board[positionFrom]);
-    board[positionFrom]->assignPos(positionTo);
+    board[positionTo]->assignPos(positionTo);
     assign(Position(positionFrom), new Space(Position(positionFrom)));
 }

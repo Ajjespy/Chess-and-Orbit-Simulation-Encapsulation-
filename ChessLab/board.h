@@ -76,16 +76,17 @@ private:
 						rr += movesArrayP[i].row;
 						cc += movesArrayP[i].col;
 					}
+					if (board[r * 8 + c]->isWhite() != board[rr * 8 + cc]->isWhite())
+					{
+						possible.insert(rr * 8 + cc);
+					}
+					else if (!currPiece->isWhite() && board[rr * 8 + cc]->isWhite())
+					{
+						possible.insert(rr * 8 + cc);
+					}
 				}
 
-				// if (board[r * 8 + c]->isWhite() != board[rr * 8 + cc]->isWhite())
-				// {
-				// 	possible.insert(rr * 8 + cc);
-				// }
-				//else if (!currPiece->isWhite() && board[rr * 8 + cc]->isWhite())
-				//{
-				//	possible.insert(rr * 8 + cc);
-				//}
+				
 				rr = r;
 				cc = c;
 			}
