@@ -82,7 +82,7 @@ private:
 					if (rr >= 0 && rr < 8 && cc >= 0 && cc < 8 && currPiece->isBlack() != board[rr * 8 + cc]->isBlack())
 					{
 						m.setSrc(currPiece->getPosition());
-						m.setDes(board[rr * 8 + c]->getPosition());
+						m.setDes(board[rr * 8 + cc]->getPosition());
 						m.setCapture(board[rr * 8 + cc]->getType());
 						moves.insert(m);
 					}
@@ -138,20 +138,21 @@ private:
 				if (r == 3)
 				{
 					cc = c - 1;
-					if (board[r * 8 + cc]->getType() == PAWN && !board[r * 8 + cc]->isBlack() && (r * 8 + cc) == lastMoved())
+					rr = r - 1;
+					if (board[r * 8 + cc]->getType() == PAWN && !board[r * 8 + cc]->isBlack() && Position(r * 8 + cc) == last.getDes())
 					{
 						m.setSrc(currPiece->getPosition());
-						m.setDes(board[r * 8 + cc]->getPosition());
+						m.setDes(board[rr * 8 + cc]->getPosition());
 						m.setEnPassant();
 						moves.insert(m);  // attack leftt
 						
 					};  
 
 					cc = c + 1;
-					if (board[r * 8 + cc]->getType() == PAWN && !board[r * 8 + cc]->isBlack() && (r * 8 + cc) == lastMoved())
+					if (board[r * 8 + cc]->getType() == PAWN && !board[r * 8 + cc]->isBlack() && Position(r * 8 + cc) == last.getDes())
 					{
 						m.setSrc(currPiece->getPosition());
-						m.setDes(board[r * 8 + cc]->getPosition());
+						m.setDes(board[rr * 8 + cc]->getPosition());
 						m.setEnPassant();
 						moves.insert(m);
 					};  // attack right)
@@ -202,19 +203,20 @@ private:
 				if (r == 4)
 				{
 					cc = c - 1;
-					if (board[r * 8 + cc]->getType() == PAWN && board[r * 8 + cc]->isBlack() && (r * 8 + cc) == lastMoved())
+					rr = r + 1;
+					if (board[r * 8 + cc]->getType() == PAWN && board[r * 8 + cc]->isBlack() && Position(r * 8 + cc) == last.getDes())
 					{
 						m.setSrc(currPiece->getPosition());
-						m.setDes(board[r * 8 + cc]->getPosition());
+						m.setDes(board[rr * 8 + cc]->getPosition());
 						m.setEnPassant();
 						moves.insert(m); // attack left
 					};    
 
 					cc = c + 1;
-					if (board[r * 8 + cc]->getType() == PAWN && board[r * 8 + cc]->isBlack() && (r * 8 + cc) == lastMoved())
+					if (board[r * 8 + cc]->getType() == PAWN && board[r * 8 + cc]->isBlack() && Position(r * 8 + cc) == last.getDes())
 					{
 						m.setSrc(currPiece->getPosition());
-						m.setDes(board[r * 8 + cc]->getPosition());
+						m.setDes(board[rr * 8 + cc]->getPosition());
 						m.setEnPassant();
 						moves.insert(m);  // attack right)
 					};  
@@ -254,7 +256,7 @@ private:
 			}
 		}
 
-#ifdef DEBUG
+
 		// castling
 		if (currPiece->getType() == KING)
 		{
@@ -313,6 +315,6 @@ private:
 				}
 			}
 		}
-#endif // DEBUG
+
 	}
 };
