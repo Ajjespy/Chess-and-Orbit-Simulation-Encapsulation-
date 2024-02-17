@@ -38,9 +38,10 @@ public:
 
 	void reset();
 	void clear();
-	void move(int positionFrom, int positionTo);
+	bool move(int positionFrom, int positionTo);
 	void assign(Position pos, Piece* p);
 	void draw(const Interface& ui);
+	void clearMoves() { moves.clear(); }
 	
 	// change to move once we implement move class
 	int lastMoved() { return 20; };

@@ -84,7 +84,6 @@ void Board::draw(const Interface& ui)
                 int loc = (*it).getDes().getLocation();
                 gout.drawPossible(loc);
             }
-            moves.clear();
         }
     }
 
@@ -95,12 +94,21 @@ void Board::draw(const Interface& ui)
 }
 
 
-void Board::move(int positionFrom, int positionTo)
+bool Board::move(int positionFrom, int positionTo)
 {
     // if valid move
-    
-    assign(Position(positionTo), board[positionFrom]);
-    board[positionTo]->assignPos(positionTo);
-    assign(Position(positionFrom), new Space(Position(positionFrom)));
-    currentMove++;
+    set <Move> ::iterator it;
+    for (it = moves.begin(); it != moves.end(); ++it)
+    {
+        if (it->getDes() == Position(positionTo))
+        {
+            assign(Position(positionTo), board[positionFrom]); 
+            board[positionTo]->assignPos(positionTo); 
+            assign(Position(positionFrom), new Space(Position(positionFrom))); 
+            currentMove++; 
+            last = *it;
+            return true;
+        }
+    }
+    return false;  
 }

@@ -345,8 +345,12 @@ void callBack(Interface *pUI, void* p)
     {
 		board->move(pUI->getPreviousPosition(), pUI->getSelectPosition());
 		pUI->clearSelectPosition();
+        board->clearMoves();
     }
-    
+    if (pUI->getSelectPosition() != -1)
+    {
+        board->clearMoves();
+    }
     board->draw(*pUI);
 }
 
