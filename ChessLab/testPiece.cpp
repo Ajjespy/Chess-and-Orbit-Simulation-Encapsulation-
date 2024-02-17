@@ -22,7 +22,7 @@ void PieceTest::constructorWhite() const
 	// VERIFY 
 	assert(pawn.getPosition().getRow() == 2);
 	assert(pawn.getPosition().getCol() == 0);
-	assert(pawn.isWhite() == true);
+	assert(pawn.isBlack() == false);
 	assert(pawn.hasMoved() == false);
 }
 
@@ -37,7 +37,7 @@ void PieceTest::constructorBlack() const
 	// VERIFY 
 	assert(p.getPosition().getRow() == 7);
 	assert(p.getPosition().getCol() == 0);
-	assert(p.isWhite() == false);
+	assert(p.isBlack() == true);
 	assert(p.hasMoved() == false);
 }
 
@@ -55,7 +55,7 @@ void PieceTest::assignPos() const
 	// VERIFY
 	assert(p.getPosition().getRow() == 4);
 	assert(p.getPosition().getCol() == 0);
-	assert(p.isWhite() == true);
+	assert(p.isBlack() == false);
 	assert(p.hasMoved() == true);
 }
 
@@ -73,7 +73,7 @@ void PieceTest::invalidPos() const
 	// VERIFY
 	assert(p.getPosition().getRow() == 2);
 	assert(p.getPosition().getCol() == 1);
-	assert(p.isWhite() == true);
+	assert(p.isBlack() == false);
 	assert(p.hasMoved() == false);
 }
 

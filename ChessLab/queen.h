@@ -19,6 +19,7 @@ public:
 		fWhite = color;
 		type = pt;
 		canSlide = true;
+		possibleDirections = 8;
 	}
 
 	void draw(ogstream& gout);
