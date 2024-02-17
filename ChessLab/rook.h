@@ -37,6 +37,4 @@ public:
 
 		return moves;
 	}
-	
-private:
 };
