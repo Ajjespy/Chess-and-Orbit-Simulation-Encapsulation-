@@ -26,14 +26,14 @@ class Board
 public:
 	Board();
 
-	int getCurrentMove()
-	{
-		return currentMove;
-	}
 
-	bool whiteTurn()
+	bool blackTurn()
 	{
-		return currentMove % 2 == 0;
+		if (currentMove % 2 == 0)
+		{
+			return true;
+		}
+		return false;
 	}
 
 	void reset();
@@ -47,19 +47,19 @@ public:
 
 private:
 	Piece* board[64];
-	int currentMove = 0;
+	int currentMove = 1; 
 	ogstream gout;
 	void swap(Position pos1, Position pos2);
 	Move last = Move();
 	set <Move> moves;
 
-	set<int> convertDirectionToMove(RC* movesArrayP, int length, Piece* currPiece)
+	void convertDirectionToMove(RC* movesArrayP, int length, Piece* currPiece)
 	{
-		set<int> possible;
 		int c = currPiece->getPosition().getCol(); //current column
 		int r = currPiece->getPosition().getRow(); //current row 
 		int cc = c;
 		int rr = r;
+		Move m;
 
 		// bishops, rooks, queens
 		if (currPiece->ifSlide())
@@ -73,20 +73,21 @@ private:
 					while (rr >= 0 && rr < 8 && cc >= 0 && cc < 8 &&
 						board[rr * 8 + cc]->getType() == SPACE)
 					{
-						possible.insert(rr * 8 + cc);
+						m.setSrc(currPiece->getPosition());
+						m.setDes(board[rr * 8 + cc]->getPosition());
+						moves.insert(m);
 						rr += movesArrayP[i].row;
 						cc += movesArrayP[i].col;
 					}
-				}
+					if (rr >= 0 && rr < 8 && cc >= 0 && cc < 8 && currPiece->isBlack() != board[rr * 8 + cc]->isBlack())
+					{
+						m.setSrc(currPiece->getPosition());
+						m.setDes(board[rr * 8 + c]->getPosition());
+						m.setCapture(board[rr * 8 + cc]->getType());
+						moves.insert(m);
+					}
 
-				// if (board[r * 8 + c]->isWhite() != board[rr * 8 + cc]->isWhite())
-				// {
-				// 	possible.insert(rr * 8 + cc);
-				// }
-				//else if (!currPiece->isWhite() && board[rr * 8 + cc]->isWhite())
-				//{
-				//	possible.insert(rr * 8 + cc);
-				//}
+				}
 				rr = r;
 				cc = c;
 			}
@@ -102,27 +103,35 @@ private:
 				{
 					if (r == 6 && board[rr * 8 + cc]->getType() == SPACE && board[(r - 1) * 8 + cc]->getType() == SPACE)
 					{
-						possible.insert(rr * 8 + cc);  // forward two blank spaces
+						m.setSrc(currPiece->getPosition());
+						m.setDes(board[rr * 8 + cc]->getPosition());
+						moves.insert(m);    // forward two blank spaces
 					};
 				};
 
 				rr = r - 1;
-				if (rr >= 0 && board[rr * 8 + cc]->getType() == SPACE) 
+				if (rr >= 0 && board[rr * 8 + cc]->getType() == SPACE)
 				{
-					possible.insert(rr * 8 + cc);
-						// forward one blank space
+					m.setSrc(currPiece->getPosition());
+					m.setDes(board[rr * 8 + cc]->getPosition());
+					moves.insert(m);
+					// forward one blank space
 				}
 
 				cc = c - 1;
 				if (!board[rr * 8 + cc]->isBlack() && board[rr * 8 + cc]->getType() != SPACE)
 				{
-					possible.insert(rr * 8 + cc);    // attack left
+					m.setSrc(currPiece->getPosition());
+					m.setDes(board[rr * 8 + cc]->getPosition());
+					moves.insert(m);    // attack left
 				}
 
 				cc = c + 1;
 				if (!board[rr * 8 + cc]->isBlack() && board[rr * 8 + cc]->getType() != SPACE)
 				{
-					possible.insert(rr * 8 + cc);    // attack right
+					m.setSrc(currPiece->getPosition());
+					m.setDes(board[rr * 8 + cc]->getPosition());
+					moves.insert(m);  // attack right
 				}
 
 				//// what about en-passant and pawn promotion
@@ -151,28 +160,36 @@ private:
 				{
 					if (r == 1 && board[rr * 8 + cc]->getType() == SPACE && board[(r + 1) * 8 + cc]->getType() == SPACE)
 					{
-						possible.insert(rr * 8 + cc);  // forward two blank spaces
+						m.setSrc(currPiece->getPosition());
+						m.setDes(board[rr * 8 + cc]->getPosition());
+						moves.insert(m);  // forward two blank spaces
 					};
 				};
 
 				rr = r + 1;
 				if (rr <= 7 && board[rr * 8 + cc]->getType() == SPACE)
 				{
-					possible.insert(rr * 8 + cc);   //forward one blank space
+					m.setSrc(currPiece->getPosition());
+					m.setDes(board[rr * 8 + cc]->getPosition());
+					moves.insert(m);   //forward one blank space
 				}
 
 				cc = c - 1;
 				if (board[rr * 8 + cc]->isBlack() && board[rr * 8 + cc]->getType() != SPACE)
 				{
-					possible.insert(rr * 8 + cc);    // attack left
+					m.setSrc(currPiece->getPosition());
+					m.setDes(board[rr * 8 + cc]->getPosition());
+					moves.insert(m);    // attack left
 				}
 
 				cc = c + 1;
 				if (board[rr * 8 + cc]->isBlack() && board[rr * 8 + cc]->getType() != SPACE)
 				{
-					possible.insert(rr * 8 + cc);    // attack right
+					m.setSrc(currPiece->getPosition());
+					m.setDes(board[rr * 8 + cc]->getPosition());
+					moves.insert(m);    // attack right
 				}
-					
+
 
 				//// what about en-passant and pawn promotion
 				//if (r == 4)
@@ -193,7 +210,7 @@ private:
 			}
 		}
 
-        // knight and king
+		// knight and king
 		else if (currPiece->getType() == KNIGHT || currPiece->getType() == KING)
 		{
 			for (int i = 0; i < length; i++)
@@ -204,20 +221,26 @@ private:
 				{
 					if (board[rr * 8 + cc]->getType() == SPACE)
 					{
-						possible.insert(rr * 8 + cc);
+						m.setSrc(currPiece->getPosition());
+						m.setDes(board[rr * 8 + cc]->getPosition());
+						moves.insert(m);
 					}
 					else
 					{
 						if (currPiece->isBlack() && !board[rr * 8 + cc]->isBlack())
 						{
-							possible.insert(rr * 8 + cc);
+							m.setSrc(currPiece->getPosition());
+							m.setDes(board[rr * 8 + cc]->getPosition());
+							moves.insert(m);
 						}
 						if (!currPiece->isBlack() && board[rr * 8 + cc]->isBlack())
 						{
-							possible.insert(rr * 8 + cc);
+							m.setSrc(currPiece->getPosition());
+							m.setDes(board[rr * 8 + cc]->getPosition());
+							moves.insert(m);
 						}
 					}
-				
+
 				}
 				rr = r;
 				cc = c;
@@ -226,9 +249,21 @@ private:
 			// castling
 			if (currPiece->getType() == KING)
 			{
+				// castling
+				if (currPiece->getType() == KING)
+				{
+					// black side, queen side
+					if (currPiece->getNMoves() == 0 && board[0]->getType() == ROOK && board[0]->getNMoves() == 0)
+					{
+						// check to make sure spots in between are open
+						if (board[1]->getType() == SPACE && board[2]->getType() == SPACE && board[3]->getType() == SPACE)
+						{
+
+						}
+					}
+
+				}
 			}
 		}
-
-		return possible;
 	}
 };
