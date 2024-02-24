@@ -44,7 +44,7 @@ public:
       //ptShip.setPixelsX(ptUpperRight.getPixelsX() * random(-0.5, 0.5));
       //ptShip.setPixelsY(ptUpperRight.getPixelsY() * random(-0.5, 0.5));
        
-       ptGPS.setMetersX(0);
+       ptGPS.setMetersX(0.0);
        ptGPS.setMetersY(42164000.0);
 
       //ptStar.setPixelsX(ptUpperRight.getPixelsX() * random(-0.5, 0.5));
@@ -87,7 +87,7 @@ void callBack(const Interface* pUI, void* p)
    // is the first step of every single callback function in OpenGL. 
    Demo* pDemo = (Demo*)p;
    int R = 6378000;
-   double G = 9.80665;
+   double G = -9.80665;
 
    ////
    //// accept input
@@ -109,23 +109,23 @@ void callBack(const Interface* pUI, void* p)
    //
    
    // Compute Height Above Earth's Surface
-   double h = sqrt(pow(pDemo->ptGPS.getMetersX(), 2.0) + pow(pDemo->ptGPS.getMetersY(), 2.0) - R);
+   double h = sqrt(pow(pDemo->ptGPS.getMetersX(), 2.0) + pow(pDemo->ptGPS.getMetersY(), 2.0)) - R;
    cout << "Height above the earth: " << h << endl;
 
    // Compute the magnitude of the acceleration
-   double g = G * pow((R / (R + h)), 2.0);
+   double g = G * pow((R / (42164000.0)), 2.0);
    cout << "Magnitude of Acceleration: " << g << endl;
 
    // Compute Direction of Gravity Pull
-   double d = atan2(0.0 - pDemo->ptGPS.getMetersX(),0.0 - pDemo->ptGPS.getMetersY());
+   double d = atan2(pDemo->ptGPS.getMetersY(), pDemo->ptGPS.getMetersX()) - (M_PI / 2);
    cout << "Direction of Gravity Pull: " << d << endl;
 
    // Horizontal component of acceleration
-   double ddx = g * sin(d * (180.0 / M_PI));
+   double ddx = -(g * sin(d));
    cout << "DDX: " << ddx << endl;
 
    // Vertical component of acceleration
-   double ddy = g * cos(d * (180.0 / M_PI));
+   double ddy = g * cos(d);
    cout << "DDY: " << ddy << endl;
 
    // Horizontal component of velocity
