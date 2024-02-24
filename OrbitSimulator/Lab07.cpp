@@ -53,6 +53,8 @@ public:
       angleShip = 0.0;
       angleEarth = 0.0;
       phaseStar = 0;
+      GPSdx = -3100.0;
+      GPSdy = 0.0;
    }
 
    //Position ptHubble;
@@ -68,6 +70,8 @@ public:
 
    double angleShip;
    double angleEarth;
+   double GPSdx;
+   double GPSdy;
 };
 
 /*************************************
@@ -84,8 +88,6 @@ void callBack(const Interface* pUI, void* p)
    Demo* pDemo = (Demo*)p;
    int R = 6378000;
    double G = 9.80665;
-   double dx = -3100.0;
-   double dy = 0.0;
 
    ////
    //// accept input
@@ -107,44 +109,50 @@ void callBack(const Interface* pUI, void* p)
    //
    
    // Compute Height Above Earth's Surface
-   double h = sqrt(pow(pDemo->ptGPS.getMetersX(), 2) + pow(pDemo->ptGPS.getMetersY(), 2) - R);
+   double h = sqrt(pow(pDemo->ptGPS.getMetersX(), 2.0) + pow(pDemo->ptGPS.getMetersY(), 2.0) - R);
    cout << "Height above the earth: " << h << endl;
 
    // Compute the magnitude of the acceleration
-   double g = G * pow((R / R + h), 2);
+   double g = G * pow((R / (R + h)), 2.0);
    cout << "Magnitude of Acceleration: " << g << endl;
 
    // Compute Direction of Gravity Pull
-   double d = atan2(0 - pDemo->ptGPS.getMetersX(),0 - pDemo->ptGPS.getMetersY());
+   double d = atan2(0.0 - pDemo->ptGPS.getMetersX(),0.0 - pDemo->ptGPS.getMetersY());
    cout << "Direction of Gravity Pull: " << d << endl;
 
    // Horizontal component of acceleration
-   double ddx = g * sin(d * (180 / M_PI));
+   double ddx = g * sin(d * (180.0 / M_PI));
    cout << "DDX: " << ddx << endl;
 
    // Vertical component of acceleration
-   double ddy = g * cos(d * (180 / M_PI));
+   double ddy = g * cos(d * (180.0 / M_PI));
    cout << "DDY: " << ddy << endl;
 
    // Horizontal component of velocity
-   dx = dx + ddx * 0.5;
-   cout << "DX: " << dx << endl;
+   pDemo->GPSdx = pDemo->GPSdx + ddx * 48.0; 
+   cout << "DX: " << pDemo->GPSdx << endl; 
 
    // Vertical component of velocity
-   dy = dy + ddy * 0.5;
-   cout << "DY: " << dy << endl;
+   pDemo->GPSdy = pDemo->GPSdy + ddy * 48.0;
+   cout << "DY: " << pDemo->GPSdy << endl;
 
    // New Horizontal and Vertical Distance Formula
-   double x = pDemo->ptGPS.getMetersX() + dx + ((0.5 * ddx) * pow(0.5, 2));
-   double y = pDemo->ptGPS.getMetersY() + dy + ((0.5 * ddy) * pow(0.5, 2));
+   double x = pDemo->ptGPS.getMetersX() + pDemo->GPSdx * 48.0 + ((0.5 * ddx) * pow(48.0, 2));
+   double y = pDemo->ptGPS.getMetersY() + pDemo->GPSdy * 48.0 + ((0.5 * ddy) * pow(48.0, 2));
    cout << "New x: " << x << "     New y: " << y << endl;
    cout << endl;
 
    pDemo->ptGPS.setMetersX(x);
    pDemo->ptGPS.setMetersY(y);
 
+   cout << pDemo->ptGPS.getMetersX() << endl;
+   cout << pDemo->ptGPS.getMetersY() << endl;
+
    // rotate the earth
-   pDemo->angleEarth += 0.01;
+   pDemo->angleEarth += ( - (2.0 * M_PI / 30.0) * (1440.0 / 86400.0));
+   
+
+
    //pDemo->angleShip += 0.02; // We don't need a ship a this point
    pDemo->phaseStar++;
 
