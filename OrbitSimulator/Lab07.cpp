@@ -17,6 +17,7 @@
 #include "position.h"      // for POINT
 #include <cmath>
 #include <math.h>
+#include "test.h"
 using namespace std;
 
 /*************************************************************************
@@ -219,6 +220,7 @@ int WINAPI wWinMain(
 int main(int argc, char** argv)
 #endif // !_WIN32
 {
+
    // Initialize OpenGL
    Position ptUpperRight;
    ptUpperRight.setZoom(128000.0 /* 128km equals 1 pixel */);
@@ -232,8 +234,8 @@ int main(int argc, char** argv)
    Demo demo(ptUpperRight);
 
    // set everything into action
-   ui.run(callBack, &demo);
-
+   //ui.run(callBack, &demo);
+   testRunner();
 
    return 0;
 }
