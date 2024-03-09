@@ -153,6 +153,8 @@
     <ClInclude Include="testPosition.h" />
     <ClInclude Include="uiDraw.h" />
     <ClInclude Include="uiInteract.h" />
+	<ClInclude Include="testShip.h" />
+	<ClInclude Include="ship.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

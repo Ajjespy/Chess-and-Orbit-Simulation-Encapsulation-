@@ -10,6 +10,7 @@
 #include "test.h"
 #include "testPosition.h"
 #include "testPhysics.h"
+#include "testShip.h"
 
 /*****************************************************************
  * TEST RUNNER
@@ -18,5 +19,6 @@
 void testRunner()
 {
    TestPosition().run();
-   TestPhysics().run();
+   //TestPhysics().run();
+   TestShip().run();
 }

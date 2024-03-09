@@ -1,1 +1,2 @@
 C:\Users\MSI\Source\Repos\cse231(1)\OrbitSimulator\Debug\Lab07.exe
+C:\Users\ajjes\Source\Repos\cse231\OrbitSimulator\Debug\Lab07.exe
