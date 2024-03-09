@@ -39,7 +39,7 @@ private:
 	void firstCallbackLoop() const
 	{
 		// setup
-		double x;
+		double x = 0.0;
 		double y;
 		Position pos = Position(0.0, 42164000.0);
 		Position vel = Position(3100, 0.0);
@@ -56,7 +56,7 @@ private:
 	void secondCallbackLoop() const
 	{
 		//setup
-		double x;
+		double x = 0.0;
 		double y;
 		Position pos = Position(-148800.0, 42163200);
 		Position vel = Position(-3100, -10.7708);
@@ -73,7 +73,7 @@ private:
 	void thirdCallbackLoop() const
 	{
 		// setup
-		double x;
+		double x = 0.0;
 		double y;
 		Position pos = Position(-297597, 42161900);
 		Position vel = Position(-3099.96, -21.5415);
@@ -90,7 +90,7 @@ private:
 	void fourthCallbackLoop() const 
 	{
 		// setup
-		double x;
+		double x = 0.0;
 		double y;
 		Position pos = Position(-446390, 42160100);
 		Position vel = Position(-3099.89, -32.312);
@@ -107,7 +107,7 @@ private:
 	void fifthCallbackLoop() const
 	{
 		// setup
-		double x;
+		double x = 0.0;
 		double y;
 		Position pos = Position(-595176, 42157800);
 		Position vel = Position(-3099.77, -43.0822);
@@ -124,7 +124,7 @@ private:
 	void sixthCallbackLoop() const
 	{
 		// setup
-		double x;
+		double x = 0.0;
 		double y;
 		Position pos = Position(-743954, 42155000);
 		Position vel = Position(-3099.62, -53.8519);
