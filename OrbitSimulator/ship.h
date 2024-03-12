@@ -4,17 +4,13 @@
  * Author:
  *    Austin Jesperson
  * Summary:
- *    The 
+ *    The ship Dream Chaser controlled by the user.
  ************************************************************************/
 #pragma once
-#include "position.h"
-#include "cmath"
+#include "entity.h"
+#include "bullet.h"
 
-using namespace std;
-
-double PI = 3.14159265358979;
-
-class Ship
+class Ship : public Entity
 {
 public:
 	Ship() 
@@ -27,11 +23,6 @@ public:
 		position = start;
 		velocity = Position(0.0, -2000.0);
 		acceleration = Position();
-	}
-
-	void rotate(double a)
-	{
-		angle += a;
 	}
 
 	void thrust() 
@@ -69,17 +60,13 @@ public:
 		}
 	}
 
-	double getAngle() { return angle; }
-	double getRadius() { return radius; }
-	Position getPosition() { return position; }
-	Position getVelocity() { return velocity; }
-	Position getAcceleration() { return acceleration; }
+	Bullet fire()
+	{
+		Bullet bullet;
+		return bullet;
+	}
 
 private:
-	double angle;
-	double radius;
-	Position position;
-	Position velocity;
-	Position acceleration;
+	
 
 };

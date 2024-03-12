@@ -14,6 +14,7 @@
 #include "position.h"
 #include "ship.h"
 #include <cassert>
+#include <set>            // for STD::SET
 
 using namespace std;
 
@@ -44,6 +45,7 @@ private:
 		start.setPixelsX(-450);
 		start.setPixelsY(450);
 		// exericse
+		
 		// verify
 		assert(ship.getAngle() == PI / 2.0);
 		assert(ship.getRadius() == 10.0);
@@ -90,10 +92,11 @@ private:
 	{
 		// setup
 		Ship ship;
+		set <Bullet> bullets; 
 		// exercise
-		// Need to make a bullet class to assert its creation. 
+		bullets.insert(ship.fire());
 		// verify
-		// assert(bullet.isValid());
+		assert(!bullets.empty());
 	}
 
 	// GPS Sixth Callback Loop
